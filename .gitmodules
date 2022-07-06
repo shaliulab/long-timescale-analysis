@@ -1,0 +1,3 @@
+[submodule "analysis/utils/motionmapperpy"]
+	path = analysis/utils/motionmapperpy
+	url = https://github.com/bermanlabemory/motionmapperpy.git
