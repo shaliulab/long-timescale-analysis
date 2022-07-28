@@ -686,7 +686,7 @@ def plot_ego(
     for frame_idx in range(data.shape[0]):
         if cap.isOpened():
             res, frame = cap.read()
-            # frame = frame[:,:,0]
+            frame = frame[:,:,0].astype(float)
 
             height, width, nbands = 96 * 5, 96 * 5, 3
             # What size does the figure need to be in inches to fit the image?

@@ -4,3 +4,9 @@
 *.h5
 *.npz
 *.v2
+*.slp
+*.png
+*.pkl
+*.err
+*.out
+*.pyc

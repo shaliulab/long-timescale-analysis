@@ -20,91 +20,72 @@ import joypy
 import h5py
 import numpy as np
 import utils.trx_utils as trx_utils
-
-
-logging.basicConfig(
-    format="%(asctime)s %(levelname)s: %(message)s",
-    level=logging.INFO,
-    datefmt="%H:%M:%S",
-)
-logger = logging.getLogger("analysis_logger")
-filenames = ["/Genomics/ayroleslab2/scott/git/lts-manuscript/data/cam1_20220217_0through190_cam1_20220217_0through190_1-tracked.analysis.h5"]
-# video_filenames = ["data/videos/0through23_cam1.mp4","data/videos/0through23_cam2.mp4"]
-
-frame_rate = 99.96  # Hz
-px_mm = 28.25  # mm/px
-
-# %%
-
-with h5py.File(filenames[0], "r") as f:
-    dset_names = list(f.keys())
-    locations = f["tracks"][:].T
-    node_names = [n.decode() for n in f["node_names"][:]]
-    locations[:,:,1,:] = -locations[:,:,1,:]
-    assignment_indices, locations, freq = trx_utils.hist_sort(
-        locations, ctr_idx=node_names.index("thorax")
-    )
-    locations[:,:,1,:] = -locations[:,:,1,:]
-
-# We want the proboscis to capture the deviation from the head -- so here we replace nans
-head_prob_interp = np.where(np.isnan(locations[:,node_names.index('proboscis'),:,:]), locations[:,node_names.index('head'),:,:],locations[:,node_names.index('proboscis'),:,:])
-locations[:,node_names.index('proboscis'),:,:] = head_prob_interp
-
-
-
-print("===locations data shape===")
-print(locations.shape)
-print()
-
-print("===nodes===")
-for i, name in enumerate(node_names):
-    print(f"{i}: {name}")
-
-# %%
-frame_count, node_count, _, instance_count = locations.shape
-locations = trx_utils.fill_missing(locations)
-
-print("frame count:", frame_count)
-print("node count:", node_count)
-print("instance count:", instance_count)
-
-px_per_mm = 28.25
-
-HEAD_INDEX = node_names.index("head")
-THORAX_INDEX = node_names.index("thorax")
-ABDO_INDEX = node_names.index("abdomen")
-
-# %%
 import glob, os, pickle
 from datetime import datetime
 import numpy as np
 from scipy.io import loadmat, savemat
 import hdf5storage
 import utils.motionmapperpy.motionmapperpy as mmpy
+from pathlib import Path
+import natsort
 
-projectPath = "lts_mm"
-mmpy.createProjectDirectory(projectPath)
+logging.basicConfig(
+    format="%(asctime)s %(levelname)s: %(message)s",
+    level=logging.INFO,
+    datefmt="%H:%M:%S",
+)
 
-for i in range(instance_count):
-    data = locations[
-        : int(0 * 60 * frame_rate), :, :, i
-    ]  # 0:int(24*60*60*frame_rate)
-    data = trx_utils.smooth_median(data, window=5)
+logger = logging.getLogger("analysis_logger")
+base_path = '/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_tracks/20220217-lts-cam1'
+filenames = glob.glob(base_path + '/*.h5')
+filenames = natsort.natsorted(filenames)
+logger.info(filenames)
+# video_filenames = ["data/videos/0through23_cam1.mp4","data/videos/0through23_cam2.mp4"]
 
-    data = trx_utils.normalize_to_egocentric(
-        x=data, ctr_ind=THORAX_INDEX, fwd_ind=HEAD_INDEX
-    )
-    # data = data[np.random.randint(0,data.shape[0],size=32000),:]
-    data = np.delete(data, [node_names.index("thorax"),node_names.index("head"),node_names.index("eyeR"),node_names.index("eyeL")],axis = 1)
-    # vels = trx_utils.instance_node_velocities(data, 0, data.shape[0]).astype(np.float32)
-    # mask = (vels > .1*px_per_mm).any(axis=1)
-    # data = data[mask,:]
-    data = data.reshape((data.shape[0], 2 * data.shape[1]))
-    print(data.shape)
-    savemat(
-        projectPath + "/Projections/dataset_%i_pcaModes.mat" % (i + 1),
-        {"projections": data},
-    )
+frame_rate = 99.96  # Hz
+px_mm = 28.25  # mm/px
+
+# %%
+for filename in filenames:
+    logger.info(filename)
+    with h5py.File(filename, "r") as f:
+        dset_names = list(f.keys())
+        locations = f["tracks"][:].T
+        node_names = [n.decode() for n in f["node_names"][:]]
+        locations[:,:,1,:] = -locations[:,:,1,:]
+        assignment_indices, locations, freq = trx_utils.hist_sort(
+            locations, ctr_idx=node_names.index("thorax")
+        )
+        locations[:,:,1,:] = -locations[:,:,1,:]
+
+    # We want the proboscis to capture the deviation from the head -- so here we replace nans
+    head_prob_interp = np.where(np.isnan(locations[:,node_names.index('proboscis'),:,:]), locations[:,node_names.index('head'),:,:],locations[:,node_names.index('proboscis'),:,:])
+    locations[:,node_names.index('proboscis'),:,:] = head_prob_interp
+    # %%
+
+    projectPath = "lts-mm"
+    mmpy.createProjectDirectory(projectPath)
+    instance_count = 4
+    for i in range(instance_count):
+        data = locations[
+            :, :, :, i
+        ]  # 0:int(24*60*60*frame_rate)
+        data = trx_utils.smooth_median(data, window=5)
+
+        data = trx_utils.normalize_to_egocentric(
+            x=data, ctr_ind=node_names.index('thorax'), fwd_ind=node_names.index('head')
+        )
+        # data = data[np.random.randint(0,data.shape[0],size=32000),:]
+        data = np.delete(data, [node_names.index("thorax"),node_names.index("head"),node_names.index("eyeR"),node_names.index("eyeL")],axis = 1)
+        # vels = trx_utils.instance_node_velocities(data, 0, data.shape[0]).astype(np.float32)
+        # mask = (vels > .1*px_mm).any(axis=1)
+        # data = data[mask,:]
+        data = data.reshape((data.shape[0], 2 * data.shape[1]))
+        # print(data.shape)
+        savemat(
+            f'{projectPath}/Projections/{Path(filename).stem}-{i}-pcaModes.mat',
+            {"projections": data},
+        )
 
 parameters = mmpy.setRunParameters()
 
@@ -116,39 +97,34 @@ parameters.waveletDecomp = True  #% Whether to do wavelet decomposition. If Fals
 
 #% tSNE embedding.
 
-parameters.minF = 0.5  #% Minimum frequency for Morlet Wavelet Transform
+parameters.minF = 1  #% Minimum frequency for Morlet Wavelet Transform
 
 parameters.maxF = 50  #% Maximum frequency for Morlet Wavelet Transform,
 #% equal to Nyquist frequency for your measurements.
 
-# parameters.perplexity = 5
-# parameters.training_perplexity = 20
+parameters.perplexity = 32
+parameters.training_perplexity = 32
+parameters.maxNeighbors = 5
 
 parameters.samplingFreq = frame_rate  #% Sampling frequency (or FPS) of data.
 
-parameters.numPeriods = 25  #% No. of frequencies between minF and maxF.
+parameters.numPeriods = 10  #% No. of frequencies between minF and maxF.
 
-parameters.numProcessors = 128  #% No. of processor to use when parallel
+parameters.numProcessors = -1 #% No. of processor to use when parallel
 #% processing (for wavelets, if not using GPU). -1 to use all cores.
 
 parameters.useGPU = 0  # GPU to use, set to -1 if GPU not present
 
-parameters.training_numPoints = int(
-    64000
-)  #% Number of points in mini-tSNEs.
+parameters.training_numPoints=8000      #% Number of points in mini-tSNEs.
 
 # %%%%% NO NEED TO CHANGE THESE UNLESS RAM (NOT GPU) MEMORY ERRORS RAISED%%%%%%%%%%
-parameters.trainingSetSize = 36000  #% Total number of representative points to find. Increase or decrease based on
-#% available RAM. For reference, 36k is a good number with 64GB RAM.
+parameters.trainingSetSize=64000        #% Total number of representative points to find. Increase or decrease based on
+                                        #% available RAM. For reference, 36k is a good number with 64GB RAM.
 
-parameters.embedding_batchSize = (
-    8000  #% Lower this if you get a memory error when re-embedding points on learned
-)
-#% tSNE map.
-
+parameters.embedding_batchSize = 128000  #% Lower this if you get a memory error when re-embedding points on learned
+                                        #% tSNE map.
 
 projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
-
 m = loadmat(projectionFiles[0], variable_names=["projections"])["projections"]
 
 # %%%%%
@@ -174,10 +150,10 @@ if not os.path.exists(tsnefolder + "training_tsne_embedding.mat"):
     print("minitSNE done, finding embeddings now.")
     print(datetime.now().strftime("%m-%d-%Y_%H-%M"))
 
-import h5py
-
 with h5py.File(tsnefolder + "training_data.mat", "r") as hfile:
     trainingSetData = hfile["trainingSetData"][:].T
+trainingSetData[~np.isfinite(trainingSetData)] = 1e-12
+trainingSetData[trainingSetData == 0] = 1e-12
 
 
 with h5py.File(tsnefolder + "training_embedding.mat", "r") as hfile:
@@ -197,7 +173,10 @@ for i in range(len(projectionFiles)):
         print("Already done. Skipping.\n")
         continue
     projections = loadmat(projectionFiles[i])["projections"]
-    projections[np.isnan(projections)] = 1e-12
+
+    projections[~np.isfinite(projections)] = 1e-12
+    projections[projections == 0] = 1e-12
+
     zValues, outputStatistics = mmpy.findEmbeddings(
         projections, trainingSetData, trainingEmbedding, parameters
     )
@@ -218,13 +197,12 @@ for i in range(len(projectionFiles)):
 
 
 
-
 print("All Embeddings Saved!")
 
 mmpy.findWatershedRegions(
     parameters,
-    minimum_regions=150,
-    startsigma=0.3,
+    minimum_regions=20,
+    startsigma=0.2,
     pThreshold=[0.33, 0.67],
     saveplot=True,
     endident="*_pcaModes.mat",
