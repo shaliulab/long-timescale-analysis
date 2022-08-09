@@ -51,7 +51,7 @@ with h5py.File(filename, "r") as f:
     node_names = [n.decode() for n in f["node_names"][:]]
 
 
-z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_3h/TSNE/zVals_wShed_groups.mat"
+z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_3h_short/TSNE/zVals_wShed_groups.mat"
 f = h5py.File(z_vals_file, "r")
 z_val_names_dset = f['zValNames']
 references = [f[z_val_names_dset[dset_idx][0]] for dset_idx in range(z_val_names_dset.shape[0])]
@@ -91,9 +91,9 @@ importlib.reload(trx_utils)
 
 # %%
 videofile = "/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_videos/20220217-lts-cam1/20220217-lts-cam1-0000.mp4"
-min_length = 5
+min_length = 25
+f = h5py.File("/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_3h_short/TSNE/zVals_wShed_groups.mat")
 
-f = h5py.File("/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_3h/TSNE/zVals_wShed_groups.mat")
 for fly_idx in range(4):
     fly_id_mm = fly_idx
     fly_id_trx = fly_idx
