@@ -1,43 +1,31 @@
-
-
 import sys
+
 sys.path.append("..")
 
-import logging
-from seaborn.distributions import distplot
-import seaborn as sns
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import palettable
-from matplotlib.colors import ListedColormap
-from tqdm import tqdm
-import pandas as pd
-import joypy
-import h5py
-import numpy as np
-import utils.trx_utils as trx_utils
-import glob, os, pickle
+import glob
+import os
 from datetime import datetime
-import numpy as np
-from scipy.io import loadmat, savemat
-import hdf5storage
-import utils.motionmapperpy.motionmapperpy as mmpy
-from pathlib import Path
+
+import h5py
 import natsort
-import argparse
+
+from tqdm import tqdm
+
+import utils.motionmapperpy.motionmapperpy as mmpy
+
 # parser = argparse.ArgumentParser(description='Bulk embeddings')
 # parser.add_argument("--number",type=int)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # args = parser.parse_args()
     # i = args.number
     parameters = mmpy.setRunParameters()
-
-
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
+    print("Found {} projection files".format(len(projectionFiles)))
+    print(f"Project path: {parameters.projectPath}")
     projectionFiles = natsort.natsorted(projectionFiles)
     with h5py.File(projectionFiles[0], "r") as f:
-        m = f['projections'][:].T
+        m = f["projections"][:].T
 
     # %%%%%
     print(m.shape)

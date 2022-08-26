@@ -5,8 +5,8 @@
 #SBATCH --nodes=1               # Node count
 #SBATCH --ntasks=1          # Number of tasks across all nodes
 #SBATCH --cpus-per-task=8      # Cores per task (>1 if multi-threaded tasks)
-#SBATCH --mem=128G           # total memory per node
-#SBATCH --array=1-3
+#SBATCH --mem=196G           # total memory per node
+#SBATCH --array=1-69
 #SBATCH --time=1-00:00:00          # Run time limit (HH:MM:SS)        # Job array
 #SBATCH --mail-type=all          # Email on job start, end, and fault
 #SBATCH --mail-user=swwolf@princeton.edu

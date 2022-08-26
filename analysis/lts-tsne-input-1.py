@@ -5,30 +5,20 @@
 
 # %%
 import sys
+
 sys.path.append("..")
 
-import logging
-from seaborn.distributions import distplot
-import seaborn as sns
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import palettable
-from matplotlib.colors import ListedColormap
-from tqdm import tqdm
-import pandas as pd
-import joypy
-import h5py
-import numpy as np
-import utils.trx_utils as trx_utils
-import glob, os, pickle
-from datetime import datetime
-import numpy as np
-from scipy.io import loadmat, savemat
-import hdf5storage
-import utils.motionmapperpy.motionmapperpy as mmpy
-from pathlib import Path
-import natsort
 import argparse
+import glob
+import logging
+from pathlib import Path
+
+import h5py
+import natsort
+import numpy as np
+
+import utils.motionmapperpy.motionmapperpy as mmpy
+import utils.trx_utils as trx_utils
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s: %(message)s",
@@ -42,61 +32,82 @@ logger = logging.getLogger("analysis_logger")
 
 frame_rate = 99.96  # Hz
 px_mm = 28.25  # mm/px
-base_paths = [ '/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_tracks/20220217-lts-cam3']
+base_paths = [
+    "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis"
+]
 # %%sb
 
-parser = argparse.ArgumentParser(description='Bulk embeddings')
-parser.add_argument("--number",type=int, help="what file tho?")
+example_file = "/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_tracks/20220217-lts-cam1/cam1_20220217_0through190_cam1_20220217_0through190_100-tracked.analysis.h5"
+with h5py.File(example_file, "r") as f:
+    node_names = [n.decode() for n in f["node_names"][:]]
 
-if __name__ == '__main__':
+parser = argparse.ArgumentParser(description="Bulk embeddings")
+parser.add_argument("--number", type=int, help="what file tho?")
+
+if __name__ == "__main__":
+    logger.info("Starting...")
     args = parser.parse_args()
     number = args.number
     for base_path in base_paths:
-        filenames = glob.glob(base_path + '/*.h5')
+        filenames = glob.glob(base_path + "/*.h5")
         filenames = natsort.natsorted(filenames)
-        # logger.info(filenames)
-        filename=filenames[number]
+        filename = filenames[number]
         logger.info(filename)
         with h5py.File(filename, "r") as f:
             dset_names = list(f.keys())
             locations = f["tracks"][:].T
-            node_names = [n.decode() for n in f["node_names"][:]]
+        logger.info("Loaded tracks...")
         # We want the proboscis to capture the deviation from the head -- so here we replace nans
-        head_prob_interp = np.where(np.isnan(locations[:,node_names.index('proboscis'),:,:]), locations[:,node_names.index('head'),:,:],locations[:,node_names.index('proboscis'),:,:])
-        locations[:,node_names.index('proboscis'),:,:] = head_prob_interp
+        head_prob_interp = np.where(
+            np.isnan(locations[:, node_names.index("proboscis"), :, :]),
+            locations[:, node_names.index("head"), :, :],
+            locations[:, node_names.index("proboscis"), :, :],
+        )
+        locations[:, node_names.index("proboscis"), :, :] = head_prob_interp
         # TODO: force y to 0
-        # %%
 
-
-        projectPath = "mmpy_lts_3h"
+        projectPath = "mmpy_lts_1d"
         mmpy.createProjectDirectory(projectPath)
         instance_count = 4
         for i in range(instance_count):
-            data = locations[
-                :, :, :, i
-            ]  # 0:int(24*60*60*frame_rate)
-            data = trx_utils.smooth_median(data, window=5)
+            data = locations[:, :, :, i]
+            # data = trx_utils.smooth_median(data, window=5)
 
             data = trx_utils.normalize_to_egocentric(
-                x=data, ctr_ind=node_names.index('thorax'), fwd_ind=node_names.index('head')
+                x=data,
+                ctr_ind=node_names.index("thorax"),
+                fwd_ind=node_names.index("head"),
             )
             # data = data[np.random.randint(0,data.shape[0],size=32000),:]
-            data = np.delete(data, [node_names.index("thorax"),node_names.index("head"),node_names.index("eyeR"),node_names.index("eyeL")],axis = 1)
+            data = np.delete(
+                data,
+                [
+                    node_names.index("thorax"),
+                    node_names.index("head"),
+                    # node_names.index("eyeR"),
+                    # node_names.index("eyeL"),
+                ],
+                axis=1,
+            )
 
-            print(data.shape)
-            mask = np.all(np.isnan(data[:,:,0]) | np.equal(data[:,:,0], 0), axis=1)
-            data = data[~mask,:,:]
-            print(data.shape)
+            logger.info("Shape before masking: %s", data.shape)
+            mask = np.all(np.isnan(data[:, :, 0]) | np.equal(data[:, :, 0], 0), axis=1)
+            data = data[~mask, :, :]
+            logger.info("Shape after masking: %s", data.shape)
+            if data.shape[0] == 0:
+                continue
             data[~np.isfinite(data)] = 1e-12
             data[data == 0] = 1e-12
             # vels = trx_utils.instance_node_velocities(data, 0, data.shape[0]).astype(np.float32)
             # mask = (vels > .1*px_mm).any(axis=1)
             # data = data[mask,:]
             data = data.reshape((data.shape[0], 2 * data.shape[1]))
-            # print(data.shape)
-
-            with h5py.File(f'{projectPath}/Projections/{Path(Path(filename).stem).stem}-{i}-pcaModes.mat', 'w') as f:
-                dset = f.create_dataset('projections', data=data.T)
+            logger.info("Writing fly number %s to file...", i)
+            with h5py.File(
+                f"{projectPath}/Projections/{Path(Path(filename).stem).stem}-{i}-pcaModes.mat",
+                "w",
+            ) as f:
+                dset = f.create_dataset("projections", data=data.T, compression="lzf")
             # savemat(
             #     f'{projectPath}/Projections/{Path(filename).stem}-{i}-pcaModes.mat',
             #     {"projections": data},

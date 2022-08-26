@@ -1,34 +1,24 @@
-
-
 import sys
+
 sys.path.append("..")
 
-import logging
-from seaborn.distributions import distplot
-import seaborn as sns
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import palettable
-from matplotlib.colors import ListedColormap
-from tqdm import tqdm
-import pandas as pd
-import joypy
-import h5py
-import numpy as np
-import utils.trx_utils as trx_utils
-import glob, os, pickle
-from datetime import datetime
-import numpy as np
-from scipy.io import loadmat, savemat
-import hdf5storage
-import utils.motionmapperpy.motionmapperpy as mmpy
-from pathlib import Path
-import natsort
 import argparse
-parser = argparse.ArgumentParser(description='Bulk embeddings')
-parser.add_argument("--number",type=int)
+import glob
+import os
+import pickle
+from datetime import datetime
 
-if __name__ == '__main__':
+import h5py
+import hdf5storage
+import natsort
+import numpy as np
+
+import utils.motionmapperpy.motionmapperpy as mmpy
+
+parser = argparse.ArgumentParser(description="Bulk embeddings")
+parser.add_argument("--number", type=int)
+
+if __name__ == "__main__":
     args = parser.parse_args()
     # i = args.number
 
@@ -37,7 +27,7 @@ if __name__ == '__main__':
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     projectionFiles = natsort.natsorted(projectionFiles)
     with h5py.File(projectionFiles[args.number], "r") as f:
-        m = f['projections'][:].T
+        m = f["projections"][:].T
     # %%%%%
     parameters.pcaModes = m.shape[1]  #%Number of PCA projections in saved files.
     parameters.numProjections = parameters.pcaModes
@@ -60,16 +50,13 @@ if __name__ == '__main__':
     trainingSetData[~np.isfinite(trainingSetData)] = 1e-12
     trainingSetData[trainingSetData == 0] = 1e-12
 
-
     with h5py.File(tsnefolder + "training_embedding.mat", "r") as hfile:
         trainingEmbedding = hfile["trainingEmbedding"][:].T
-
 
     if parameters.method == "TSNE":
         zValstr = "zVals" if parameters.waveletDecomp else "zValsProjs"
     else:
         zValstr = "uVals"
-
 
     print("Finding Embeddings")
     # print("%i/%i : %s" % (args.number + 1, len(projectionFiles), projectionFiles[i]))
@@ -77,13 +64,17 @@ if __name__ == '__main__':
         print("Already done. Skipping.\n")
         exit
     with h5py.File(projectionFiles[args.number], "r") as f:
-        projections = f['projections'][:].T
+        projections = f["projections"][:].T
 
     projections[~np.isfinite(projections)] = 1e-12
     projections[projections == 0] = 1e-12
 
     zValues, outputStatistics = mmpy.findEmbeddings(
-        projections, trainingSetData, trainingEmbedding, parameters, projectionFiles[args.number]
+        projections,
+        trainingSetData,
+        trainingEmbedding,
+        parameters,
+        projectionFiles[args.number],
     )
     hdf5storage.write(
         data={"zValues": zValues},
@@ -99,4 +90,3 @@ if __name__ == '__main__':
         pickle.dump(outputStatistics, hfile)
     print("Embeddings saved.\n")
     del zValues, projections, outputStatistics
-

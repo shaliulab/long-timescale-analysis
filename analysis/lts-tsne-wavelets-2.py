@@ -1,43 +1,28 @@
-
-
-from sqlite3 import paramstyle
 import sys
+
 sys.path.append("..")
 
-import logging
-from seaborn.distributions import distplot
-import seaborn as sns
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import palettable
-from matplotlib.colors import ListedColormap
-from tqdm import tqdm
-import pandas as pd
-import joypy
-import h5py
-import numpy as np
-import utils.trx_utils as trx_utils
-import glob, os, pickle
+import glob
+import os
 from datetime import datetime
-import numpy as np
-from scipy.io import loadmat, savemat
-import hdf5storage
-import utils.motionmapperpy.motionmapperpy as mmpy
-from pathlib import Path
+
+import h5py
 import natsort
-import argparse
+
+import utils.motionmapperpy.motionmapperpy as mmpy
+
 # parser = argparse.ArgumentParser(description='Bulk embeddings')
 # parser.add_argument("--number",type=int)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # args = parser.parse_args()
     # i = args.number
     parameters = mmpy.setRunParameters()
 
-    projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
+    projectionFiles = glob.glob(parameters.projectPath + "/Projections/20220418*cam4*pcaModes.mat")
     projectionFiles = natsort.natsorted(projectionFiles)
     with h5py.File(projectionFiles[0], "r") as f:
-        m = f['projections'][:].T
+        m = f["projections"][:].T
 
     # %%%%%
     print(m.shape)
@@ -58,7 +43,6 @@ if __name__ == '__main__':
         tsnefolder = parameters.projectPath + "/UMAP/"
 
     if not os.path.exists(tsnefolder + "training_tsne_embedding.mat"):
-        print("Running minitSNE")
-        mmpy.get_wavelets(projectionFiles,parameters)
-        print("minitSNE done, finding embeddings now.")
+        print("Getting wavelets...")
+        mmpy.get_wavelets(projectionFiles, parameters)
         print(datetime.now().strftime("%m-%d-%Y_%H-%M"))

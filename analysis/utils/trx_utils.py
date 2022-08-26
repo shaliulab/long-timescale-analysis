@@ -1,12 +1,12 @@
+import logging
+
+import h5py
+import matplotlib.colors as colors
 import numpy as np
 import pandas as pd
 import scipy.ndimage
-from tqdm import tqdm
 from scipy.signal import savgol_filter
-import matplotlib.colors as colors
-import h5py
-import logging
-
+from tqdm import tqdm
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s: %(message)s",
@@ -582,7 +582,15 @@ def plot_trx(
     output_path="output.mp4",
 ):
     ffmpeg_writer = skvideo.io.FFmpegWriter(
-        f"{output_path}_fly_node_locations.mp4", outputdict={"-vcodec": "libx265",'-r': '20', '-pix_fmt': 'yuv420p', '-b:v': '50M', '-crf': '1', '-preset': 'veryslow'}
+        f"{output_path}_fly_node_locations.mp4",
+        outputdict={
+            "-vcodec": "libx265",
+            "-r": "20",
+            "-pix_fmt": "yuv420p",
+            "-b:v": "50M",
+            "-crf": "1",
+            "-preset": "veryslow",
+        },
     )
     cap = cv2.VideoCapture(video_path)
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_start - 1)
@@ -603,20 +611,21 @@ def plot_trx(
             for node_idx in range(data_subset.shape[1]):
                 for idx in range(2, data_subset.shape[0]):
                     if trail_length != 1:
-                    # Note that you need to use single steps or the data has "steps"
+                        # Note that you need to use single steps or the data has "steps"
                         plt.plot(
                             data_subset[(idx - 1) : (idx + 1), node_idx, 0, fly_idx],
-                            data_subset[(idx - 1) : (idx + 1) , node_idx, 1, fly_idx],
-                            linewidth=.5 * idx / data_subset.shape[0],
+                            data_subset[(idx - 1) : (idx + 1), node_idx, 1, fly_idx],
+                            linewidth=0.5 * idx / data_subset.shape[0],
                             color=pal[node_idx],
-                            alpha=.3,
-                            solid_capstyle='round',
+                            alpha=0.3,
+                            solid_capstyle="round",
                         )
                     else:
                         plt.scatter(
                             data_subset[idx, node_idx, 0, fly_idx],
                             data_subset[idx, node_idx, 1, fly_idx],
-                            color=palettable.tableau.Tableau_20.mpl_colors[node_idx])
+                            color=palettable.tableau.Tableau_20.mpl_colors[node_idx],
+                        )
 
         if cap.isOpened():
             res, frame = cap.read()
@@ -645,8 +654,8 @@ def plot_trx(
     # return fig
 
 
-import numpy as np
 import cv2
+import numpy as np
 
 
 def rotate_image(image, angle):
@@ -657,8 +666,9 @@ def rotate_image(image, angle):
     return result
 
 
-from matplotlib.collections import LineCollection
 import matplotlib.patheffects as path_effects
+from matplotlib.collections import LineCollection
+
 
 def plot_ego(
     tracks,
@@ -674,7 +684,15 @@ def plot_ego(
     if isinstance(fly_ids, int):
         fly_idx = [fly_ids]
     ffmpeg_writer = skvideo.io.FFmpegWriter(
-        f"{output_path}", outputdict={"-vcodec": "libx264", '-r': '25', '-pix_fmt': 'yuv420p', '-b:v': '20M', '-crf': '1', '-preset': 'slow'}
+        f"{output_path}",
+        outputdict={
+            "-vcodec": "libx264",
+            "-r": "25",
+            "-pix_fmt": "yuv420p",
+            "-b:v": "20M",
+            "-crf": "1",
+            "-preset": "slow",
+        },
     )
     cap = cv2.VideoCapture(video_path)
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame_start - 1)
@@ -686,7 +704,7 @@ def plot_ego(
     for frame_idx in range(data.shape[0]):
         if cap.isOpened():
             res, frame = cap.read()
-            frame = frame[:,:,0].astype(float)
+            frame = frame[:, :, 0].astype(float)
 
             height, width, nbands = 96 * 5, 96 * 5, 3
             # What size does the figure need to be in inches to fit the image?
@@ -728,7 +746,7 @@ def plot_ego(
                         segments,
                         linewidths=lwidths / data_subset.shape[0],
                         colors=rgba_colors,
-                        path_effects=[path_effects.Stroke(capstyle="round")]
+                        path_effects=[path_effects.Stroke(capstyle="round")],
                     )  # =palettable.tableau.Tableau_20.mpl_colors[node_idx])
                     ax.add_collection(lc)
 
@@ -792,11 +810,10 @@ def rotate(p, origin=(0, 0), angle=0):
 
 
 import matplotlib as mpl
-import seaborn as sns
-from matplotlib.ticker import MaxNLocator
-import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FormatStrFormatter
+import numpy as np
+import seaborn as sns
+from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 
@@ -964,29 +981,32 @@ def load_tracks(expmt_dict):
 
 from pathlib import Path
 
+
 def ensure_dir(dir_path):
     Path(dir_path).mkdir(parents=True, exist_ok=True)
 
+
 def rle(inarray):
-        """ run length encoding. Partial credit to R rle function.
-            Multi datatype arrays catered for including non Numpy
-            returns: tuple (runlengths, startpositions, values) """
-        ia = np.asarray(inarray)                # force numpy
-        n = len(ia)
-        if n == 0:
-            return (None, None, None)
-        else:
-            y = ia[1:] != ia[:-1]               # pairwise unequal (string safe)
-            i = np.append(np.where(y), n - 1)   # must include last element posi
-            z = np.diff(np.append(-1, i))       # run lengths
-            p = np.cumsum(np.append(0, z))[:-1] # positions
-            return(z, p, ia[i])
+    """run length encoding. Partial credit to R rle function.
+    Multi datatype arrays catered for including non Numpy
+    returns: tuple (runlengths, startpositions, values)"""
+    ia = np.asarray(inarray)  # force numpy
+    n = len(ia)
+    if n == 0:
+        return (None, None, None)
+    else:
+        y = ia[1:] != ia[:-1]  # pairwise unequal (string safe)
+        i = np.append(np.where(y), n - 1)  # must include last element posi
+        z = np.diff(np.append(-1, i))  # run lengths
+        p = np.cumsum(np.append(0, z))[:-1]  # positions
+        return (z, p, ia[i])
+
 
 def rolling_window(a, window):
     pad = np.ones(len(a.shape), dtype=np.int32)
-    pad[-1] = window-1
+    pad[-1] = window - 1
     pad = list(zip(pad, np.zeros(len(a.shape), dtype=np.int32)))
-    a = np.pad(a, pad,mode='reflect')
+    a = np.pad(a, pad, mode="reflect")
     shape = a.shape[:-1] + (a.shape[-1] - window + 1, window)
     strides = a.strides + (a.strides[-1],)
     return np.lib.stride_tricks.as_strided(a, shape=shape, strides=strides)

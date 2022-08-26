@@ -1,33 +1,37 @@
 import sys
+
 sys.path.append("..")
 
+import glob
 import logging
-from seaborn.distributions import distplot
-import seaborn as sns
+import os
+import pickle
+from datetime import datetime
+from pathlib import Path
+
+import h5py
+import hdf5storage
+import joypy
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import palettable
-from matplotlib.colors import ListedColormap
-from tqdm import tqdm
-import pandas as pd
-import joypy
-import h5py
-import numpy as np
-import utils.trx_utils as trx_utils
-import glob, os, pickle
-from datetime import datetime
-import numpy as np
-from scipy.io import loadmat, savemat
-import hdf5storage
-import utils.motionmapperpy.motionmapperpy as mmpy
-from pathlib import Path
 import natsort
+import numpy as np
+import palettable
+import pandas as pd
+import seaborn as sns
+from matplotlib.colors import ListedColormap
+from scipy.io import loadmat, savemat
+from seaborn.distributions import distplot
+from tqdm import tqdm
+
+import utils.motionmapperpy.motionmapperpy as mmpy
+import utils.trx_utils as trx_utils
 
 parameters = mmpy.setRunParameters()
 
 projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
 projectionFiles = natsort.natsorted(projectionFiles)
-m = h5py.File(projectionFiles[0], 'r')['projections']
+m = h5py.File(projectionFiles[0], "r")["projections"]
 # %%%%%
 parameters.pcaModes = m.shape[1]  #%Number of PCA projections in saved files.
 parameters.numProjections = parameters.pcaModes
@@ -36,9 +40,9 @@ del m
 
 mmpy.findWatershedRegions(
     parameters,
-    minimum_regions=20,
-    startsigma=2,
-    # pThreshold=[0.33, .67],
+    minimum_regions=50,
+    startsigma=1,
+    pThreshold=[0.33, .67],
     saveplot=True,
     endident="*-pcaModes.mat",
 )
