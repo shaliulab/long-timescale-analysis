@@ -1,7 +1,7 @@
 import sys
 
 sys.path.append("..")
-
+import argparse
 import glob
 import os
 from datetime import datetime
@@ -11,16 +11,17 @@ import natsort
 
 import utils.motionmapperpy.motionmapperpy as mmpy
 
-# parser = argparse.ArgumentParser(description='Bulk embeddings')
-# parser.add_argument("--number",type=int)
+parser = argparse.ArgumentParser(description='Bulk wavelets')
+parser.add_argument("--number",type=int)
 
 if __name__ == "__main__":
-    # args = parser.parse_args()
-    # i = args.number
+    args = parser.parse_args()
+    i = args.number
     parameters = mmpy.setRunParameters()
 
-    projectionFiles = glob.glob(parameters.projectPath + "/Projections/20220418*cam4*pcaModes.mat")
+    projectionFiles = glob.glob(parameters.projectPath + "/Projections/*day1*pcaModes.mat")
     projectionFiles = natsort.natsorted(projectionFiles)
+    print(projectionFiles[0])
     with h5py.File(projectionFiles[0], "r") as f:
         m = f["projections"][:].T
 
@@ -43,6 +44,6 @@ if __name__ == "__main__":
         tsnefolder = parameters.projectPath + "/UMAP/"
 
     if not os.path.exists(tsnefolder + "training_tsne_embedding.mat"):
-        print("Getting wavelets...")
-        mmpy.get_wavelets(projectionFiles, parameters)
+        print("Calculating wavelets...")
+        mmpy.get_wavelets(projectionFiles, parameters, i)
         print(datetime.now().strftime("%m-%d-%Y_%H-%M"))

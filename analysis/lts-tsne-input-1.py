@@ -49,7 +49,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     number = args.number
     for base_path in base_paths:
-        filenames = glob.glob(base_path + "/*.h5")
+        filenames = glob.glob(base_path + "/*vars.h5")
         filenames = natsort.natsorted(filenames)
         filename = filenames[number]
         logger.info(filename)
