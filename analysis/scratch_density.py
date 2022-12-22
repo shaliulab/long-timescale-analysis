@@ -14,12 +14,12 @@ import logging
 from pathlib import Path
 
 import h5py
+import matplotlib as mpl
 import natsort
 import numpy as np
-import matplotlib as mpl
-
 import utils.motionmapperpy.motionmapperpy.mmutils as mmutils
 import utils.trx_utils as trx_utils
+
 # %%
 # %matplotlib inline
 
@@ -35,8 +35,9 @@ mpl.rcParams["axes.titlesize"] = "xx-large"  # medium, large, x-large, xx-large
 mpl.style.use("seaborn-deep")
 
 import matplotlib.pyplot as plt
+
 bmapcmap = mmutils.gencmap()
-_, xx , density = mmutils.findPointDensity()
+_, xx, density = mmutils.findPointDensity()
 
 plt.imshow(density, origin="lower", cmap=bmapcmap)
 

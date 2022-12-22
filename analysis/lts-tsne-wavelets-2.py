@@ -8,18 +8,17 @@ from datetime import datetime
 
 import h5py
 import natsort
-
 import utils.motionmapperpy.motionmapperpy as mmpy
 
-parser = argparse.ArgumentParser(description='Bulk wavelets')
-parser.add_argument("--number",type=int)
+parser = argparse.ArgumentParser(description="Bulk wavelets")
+parser.add_argument("--number", type=int)
 
 if __name__ == "__main__":
     args = parser.parse_args()
     i = args.number
     parameters = mmpy.setRunParameters()
 
-    projectionFiles = glob.glob(parameters.projectPath + "/Projections/*day1*pcaModes.mat")
+    projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     projectionFiles = natsort.natsorted(projectionFiles)
     print(projectionFiles[0])
     with h5py.File(projectionFiles[0], "r") as f:

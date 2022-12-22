@@ -12,7 +12,6 @@ import h5py
 import hdf5storage
 import natsort
 import numpy as np
-
 import utils.motionmapperpy.motionmapperpy as mmpy
 
 parser = argparse.ArgumentParser(description="Bulk embeddings")

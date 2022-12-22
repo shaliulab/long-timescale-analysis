@@ -19,13 +19,12 @@ import numpy as np
 import palettable
 import pandas as pd
 import seaborn as sns
+import utils.motionmapperpy.motionmapperpy as mmpy
+import utils.trx_utils as trx_utils
 from matplotlib.colors import ListedColormap
 from scipy.io import loadmat, savemat
 from seaborn.distributions import distplot
 from tqdm import tqdm
-
-import utils.motionmapperpy.motionmapperpy as mmpy
-import utils.trx_utils as trx_utils
 
 parameters = mmpy.setRunParameters()
 
@@ -41,8 +40,8 @@ del m
 mmpy.findWatershedRegions(
     parameters,
     minimum_regions=50,
-    startsigma=1,
-    pThreshold=[0.33, .67],
+    startsigma=1.5,
+    pThreshold=[0.33, 0.67],
     saveplot=True,
     endident="*-pcaModes.mat",
 )

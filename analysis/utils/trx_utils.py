@@ -89,7 +89,11 @@ def fill_missing(x, kind="nearest", axis=0, **kwargs):
         x, initial_shape = flatten_features(x, axis=axis)
 
         # Interpolate.
-        x = fill_missing(x, kind=kind, axis=0, **kwargs)
+        try:
+            x = fill_missing(x, kind=kind, axis=0, **kwargs)
+        except Exception as e:
+            logger.error(f"Error interpolating: {e}")
+            # raise e
 
         # Restore to original shape
         x = unflatten_features(x, initial_shape, axis=axis)
@@ -653,6 +657,77 @@ def plot_trx(
     ffmpeg_writer.close()
     # return fig
 
+
+def plot_trx_no_vid(
+    tracks,
+    fly_ids,
+    frame_start=0,
+    frame_end=100,
+    trail_length=10,
+    output_path="output",
+):
+    ffmpeg_writer = skvideo.io.FFmpegWriter(
+        f"{output_path}_fly_node_locations.mp4",
+        outputdict={
+            "-vcodec": "libx264",
+            "-r": "20",
+            "-pix_fmt": "yuv420p",
+            "-b:v": "50M",
+            "-crf": "1",
+            "-preset": "veryfast",
+        },
+    )
+    data = tracks[frame_start:frame_end, :, :, :]
+    dpi = 1000
+    pal = sns.husl_palette(14)
+    for frame_idx in range(data.shape[0]):
+        fig, ax = plt.subplots(figsize=(1536 / 300, 1536 / 300), dpi=dpi)
+        print(f"Frame {frame_idx}")
+        data_subset = data[max((frame_idx - trail_length), 0) : (frame_idx), :, :, :]
+        # if frame_idx >= 150:
+        #     if trail_length <= 5:
+        #         trail_length = 5
+        #         continue
+        #     else:
+        #         trail_length = 150 - ((frame_idx - 150)*3)
+        for fly_idx in fly_ids:
+            for node_idx in range(data_subset.shape[1]):
+                for idx in range(2, data_subset.shape[0]):
+                    if trail_length != 1:
+                        # Note that you need to use single steps or the data has "steps"
+                        plt.plot(
+                            data_subset[(idx - 1) : (idx + 1), node_idx, 0, fly_idx],
+                            data_subset[(idx - 1) : (idx + 1), node_idx, 1, fly_idx],
+                            linewidth=10 * idx / data_subset.shape[0],
+                            color=pal[node_idx],
+                            alpha=0.3,
+                            solid_capstyle="round",
+                        )
+                    else:
+                        plt.scatter(
+                            data_subset[idx, node_idx, 0, fly_idx],
+                            data_subset[idx, node_idx, 1, fly_idx],
+                            color=palettable.tableau.Tableau_20.mpl_colors[node_idx],
+                        )
+        # plt.xlim(0,1535)
+        # plt.ylim(0,1535)
+        ax = plt.Axes(fig, [0.0, 0.0, 1.0, 1.0])
+        ax.set_axis_off()
+        fig.add_axes(ax)
+        fig.set_size_inches(5, 5, True)
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+        ax.axis("off")
+        fig.patch.set_visible(False)
+        fig.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=None, hspace=None)
+        fig.canvas.draw()
+        image_from_plot = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+        image_from_plot = image_from_plot.reshape(
+            fig.canvas.get_width_height()[::-1] + (3,)
+        )
+        ffmpeg_writer.writeFrame(image_from_plot)
+        plt.close()
+    ffmpeg_writer.close()
 
 import cv2
 import numpy as np

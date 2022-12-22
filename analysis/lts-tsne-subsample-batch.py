@@ -8,15 +8,17 @@ from datetime import datetime
 
 import h5py
 import natsort
-import utils.motionmapperpy.motionmapperpy as mmpy
-from tqdm import tqdm
 
-# parser = argparse.ArgumentParser(description='Bulk embeddings')
-# parser.add_argument("--number",type=int)
+import argparse
+
+import utils.motionmapperpy.motionmapperpy as mmpy
+
+parser = argparse.ArgumentParser(description='Bulk embeddings')
+parser.add_argument("--number",type=int)
 
 if __name__ == "__main__":
-    # args = parser.parse_args()
-    # i = args.number
+    args = parser.parse_args()
+    i = args.number
     parameters = mmpy.setRunParameters()
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     print("Found {} projection files".format(len(projectionFiles)))
@@ -43,8 +45,10 @@ if __name__ == "__main__":
     elif parameters.method == "UMAP":
         tsnefolder = parameters.projectPath + "/UMAP/"
 
+
+    # Deal with edge calls here file['edger'][:].T.shape
     if not os.path.exists(tsnefolder + "training_tsne_embedding.mat"):
         print("Running minitSNE")
-        mmpy.subsampled_tsne_from_projections(parameters, parameters.projectPath)
+        mmpy.subsampled_tsne_from_projections_batch(parameters, parameters.projectPath, i)
         print("minitSNE done, finding embeddings now.")
         print(datetime.now().strftime("%m-%d-%Y_%H-%M"))
