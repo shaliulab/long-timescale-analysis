@@ -69,6 +69,37 @@ def unflatten_features(x, initial_shape, axis=0):
 
     return x
 
+def fill_nan_median(x, kind="median", axis=0, **kwargs):
+    """Fill missing values in a timeseries.
+
+    Args:
+        x: Timeseries of shape (time, ...) or with time axis specified by axis.
+        kind: Type of interpolation to use. Defaults to "nearest".
+        axis: Time axis (default: 0).
+
+    Returns:
+        Timeseries of the same shape as the input with NaNs filled in.
+
+    Notes:
+        This uses pandas.DataFrame.interpolate and accepts the same kwargs.
+    """
+    if x.ndim > 2:
+        # Reshape to (time, D)
+        x, initial_shape = flatten_features(x, axis=axis)
+
+        # Interpolate.
+        try:
+            x = fill_nan_median(x, kind=kind, axis=axis, **kwargs)
+        except Exception as e:
+            logger.error(f"Error interpolating: {e}")
+            # raise e
+
+        # Restore to original shape
+        x = unflatten_features(x, initial_shape, axis=axis)
+
+        return x
+    return pd.DataFrame(x).apply(pd.to_numeric, errors='coerce').fillna(value=pd.Series(np.nanmedian(x, axis=axis)), axis=axis, **kwargs).to_numpy()
+
 
 def fill_missing(x, kind="nearest", axis=0, **kwargs):
     """Fill missing values in a timeseries.

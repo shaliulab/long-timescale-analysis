@@ -56,10 +56,24 @@ if __name__ == "__main__":
         with h5py.File(filename, "r") as f:
             dset_names = list(f.keys())
             locations = f["tracks"][:].T
-            locations = trx_utils.fill_missing(locations, kind="pchip")
-            locations = trx_utils.smooth_median(locations, window=5)
         logger.info("Loaded tracks...")
         # We want the proboscis to capture the deviation from the head -- so here we replace nans
+        # head_prob_interp = np.where(
+        #     np.isnan(locations[:, node_names.index("proboscis"), :, :]),
+        #     locations[:, node_names.index("head"), :, :],
+        #     locations[:, node_names.index("proboscis"), :, :],
+        # )
+        # locations[:, node_names.index("proboscis"), :, :] = head_prob_interp
+
+        locations[:, 0:13, :] = trx_utils.fill_missing(locations[:, 0:13, :], kind="pchip", limit=10)
+        logger.info("Filled missing data with median...")
+        locations[:, node_names.index("head"), :, :] = trx_utils.fill_missing(
+            locations[:, node_names.index("head"), :, :], kind="pchip"
+        )
+        locations[:, node_names.index("thorax"), :, :] = trx_utils.fill_missing(
+            locations[:, node_names.index("thorax"), :, :], kind="pchip"
+        )
+
         head_prob_interp = np.where(
             np.isnan(locations[:, node_names.index("proboscis"), :, :]),
             locations[:, node_names.index("head"), :, :],
@@ -67,9 +81,17 @@ if __name__ == "__main__":
         )
         locations[:, node_names.index("proboscis"), :, :] = head_prob_interp
 
+        locations = trx_utils.fill_nan_median(locations)
+        locations = trx_utils.smooth_median(locations, window=5)
+        locations = trx_utils.smooth_gaussian(locations)
         instance_count = 4
         for i in range(instance_count):
             data = locations[:, :, :, i]
+            with h5py.File(
+                f"{parameters.projectPath}/Projections/{Path(Path(filename).stem).stem}-{i}-processed-tracks.h5",
+                "w",
+            ) as f:
+                dset = f.create_dataset("tracks", data=data, compression="lzf")
 
             data = trx_utils.normalize_to_egocentric(
                 x=data,
@@ -84,7 +106,7 @@ if __name__ == "__main__":
                 ],
                 axis=1,
             )
-
+            
             logger.info("Shape before masking: %s", data.shape)
             mask = np.all(np.isnan(data[:, :, 0]) | np.equal(data[:, :, 0], 0), axis=1)
             # with h5py.File(
@@ -97,11 +119,14 @@ if __name__ == "__main__":
             # logger.info("Shape after masking: %s", data.shape)
             if data.shape[0] == 0:
                 continue
-            data[~np.isfinite(data)] = 1e-12
-            data[data == 0] = 1e-12
+            # After egocentrizing
             # vels = trx_utils.instance_node_velocities(data, 0, data.shape[0]).astype(np.float32)
             # mask = (vels > .1*px_mm).any(axis=1)
-            # data = data[mask,:]
+            # data = data[mask,:] = np.nan
+            # data = trx_utils.fill_missing(data, kind="pchip", limit=10)
+
+            # data[~np.isfinite(data)] = 0
+            # data[data == 0] = 1e-12
             reshaped_data = data.reshape((data.shape[0], 2 * data.shape[1]))
             logger.info("Writing fly number %s to file...", i)
             with h5py.File(
@@ -109,7 +134,12 @@ if __name__ == "__main__":
                 "w",
             ) as f:
                 dset = f.create_dataset("projections", data=reshaped_data.T, compression="lzf")
-            
+
+
+            edge_file = '../data/edge/' + '-'.join(Path(filename).stem.split('-')[:3]) + '_edge.mat'
+            with h5py.File(edge_file, "r") as hfile:
+                edge_mask = np.append([False], hfile["edger"][:].T[:, i].astype(bool))
+
             logger.info("Writing fly number %s EGO to file...", i)
             with h5py.File(
                 f"{parameters.projectPath}/Ego/{Path(Path(filename).stem).stem}-{i}-pcaModes.h5",
@@ -117,7 +147,10 @@ if __name__ == "__main__":
             ) as f:
                 dset = f.create_dataset("tracks", data=data.T, compression="lzf")
                 dset = f.create_dataset("missing_data_indices", data=mask, compression="lzf")
+                dset = f.create_dataset("edge_calls", data=edge_mask, compression="lzf")
             # savemat(
             #     f'{projectPath}/Projections/{Path(filename).stem}-{i}-pcaModes.mat',
             #     {"projections": data},
             # )
+
+# %%

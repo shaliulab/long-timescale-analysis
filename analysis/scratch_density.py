@@ -41,4 +41,6 @@ _, xx, density = mmutils.findPointDensity()
 
 plt.imshow(density, origin="lower", cmap=bmapcmap)
 
-plt.savefig("test.png")
+plt.savefig("figures/density.png")
+
+# %%

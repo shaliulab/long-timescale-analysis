@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=input  # Name of the job
+#SBATCH --job-name=wavelets  # Name of the job
 #SBATCH --output=logs/batch-%A-%a.out  # STDOUT file
 #SBATCH --error=logs/batch-%A-%a.err   # STDERR file
 #SBATCH --nodes=1               # Node count

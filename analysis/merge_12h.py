@@ -11,12 +11,10 @@ import glob
 import logging
 
 import h5py
-
 import natsort
 import numpy as np
-
-from tqdm import tqdm
 import utils.trx_utils as trx_utils
+from tqdm import tqdm
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s: %(message)s",
@@ -39,7 +37,10 @@ px_mm = 28.25  # mm/px
 
 # %%
 for i, filename_set in tqdm(enumerate(list(chunker(filenames, 12)))):
-    logger.info("Building: %s", f"20220217-lts-cam1_{((i*12))}through{((i*12)-1) + len(filename_set)}.npy")
+    logger.info(
+        "Building: %s",
+        f"20220217-lts-cam1_{((i*12))}through{((i*12)-1) + len(filename_set)}.npy",
+    )
     output = None
     for filename in tqdm(filename_set):
         with h5py.File(filename, "r") as f:
@@ -57,4 +58,6 @@ for i, filename_set in tqdm(enumerate(list(chunker(filenames, 12)))):
             else:
                 output = locations
     logger.info("Writing file...")
-    np.save(f"20220217-lts-cam1_{((i*12))}through{(i*12) + len(filename_set)}.npy", output)
+    np.save(
+        f"20220217-lts-cam1_{((i*12))}through{(i*12) + len(filename_set)}.npy", output
+    )
