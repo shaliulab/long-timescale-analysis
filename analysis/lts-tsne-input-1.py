@@ -109,6 +109,7 @@ if __name__ == "__main__":
             
             logger.info("Shape before masking: %s", data.shape)
             mask = np.all(np.isnan(data[:, :, 0]) | np.equal(data[:, :, 0], 0), axis=1)
+            # missingness_mask = np.sum(np.isnan(data[:, :, 0]) | np.equal(data[:, :, 0], 0), axis=1) > 6
             # with h5py.File(
             #     f"{parameters.projectPath}/Projections/{Path(Path(filename).stem).stem}-{i}-missing-data-indices.h5",
             #     "w",

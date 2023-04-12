@@ -41,12 +41,12 @@ for filename in tqdm(filenames):
     # locations = trx_utils.fill_missing(locations, kind="linear", limit=10)
     # locations = trx_utils.smooth_median(locations)
     logger.info("Shape of locations: %s", locations.shape)
-    vels = trx_utils.instance_node_velocities(locations, 0, locations.shape[0])
+    # vels = trx_utils.instance_node_velocities(locations, 0, locations.shape[0])
 
     # logger.info("Writing file...")
     with h5py.File(f"{Path(filename).stem}.h5", "w") as f:
         f.create_dataset("tracks", data=locations.T, compression="lzf")
-        f.create_dataset("vels", data=vels.T, compression="lzf")
+        # f.create_dataset("vels", data=vels.T, compression="lzf")
 
 # %%
 
