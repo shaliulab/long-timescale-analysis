@@ -69,6 +69,7 @@ def unflatten_features(x, initial_shape, axis=0):
 
     return x
 
+
 def fill_nan_median(x, kind="median", axis=0, **kwargs):
     """Fill missing values in a timeseries.
 
@@ -98,7 +99,12 @@ def fill_nan_median(x, kind="median", axis=0, **kwargs):
         x = unflatten_features(x, initial_shape, axis=axis)
 
         return x
-    return pd.DataFrame(x).apply(pd.to_numeric, errors='coerce').fillna(value=pd.Series(np.nanmedian(x, axis=axis)), axis=axis, **kwargs).to_numpy()
+    return (
+        pd.DataFrame(x)
+        .apply(pd.to_numeric, errors="coerce")
+        .fillna(value=pd.Series(np.nanmedian(x, axis=axis)), axis=axis, **kwargs)
+        .to_numpy()
+    )
 
 
 def fill_missing(x, kind="nearest", axis=0, **kwargs):
@@ -759,6 +765,7 @@ def plot_trx_no_vid(
         ffmpeg_writer.writeFrame(image_from_plot)
         plt.close()
     ffmpeg_writer.close()
+
 
 import cv2
 import numpy as np

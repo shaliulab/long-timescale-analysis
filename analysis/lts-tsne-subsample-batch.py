@@ -2,19 +2,17 @@ import sys
 
 sys.path.append("..")
 
+import argparse
 import glob
 import os
 from datetime import datetime
 
 import h5py
 import natsort
-
-import argparse
-
 import utils.motionmapperpy.motionmapperpy as mmpy
 
-parser = argparse.ArgumentParser(description='Bulk embeddings')
-parser.add_argument("--number",type=int)
+parser = argparse.ArgumentParser(description="Bulk embeddings")
+parser.add_argument("--number", type=int)
 
 if __name__ == "__main__":
     args = parser.parse_args()
@@ -45,10 +43,11 @@ if __name__ == "__main__":
     elif parameters.method == "UMAP":
         tsnefolder = parameters.projectPath + "/UMAP/"
 
-
     # Deal with edge calls here file['edger'][:].T.shape
     if not os.path.exists(tsnefolder + "training_tsne_embedding.mat"):
         print("Running minitSNE")
-        mmpy.subsampled_tsne_from_projections_batch(parameters, parameters.projectPath, i)
+        mmpy.subsampled_tsne_from_projections_batch(
+            parameters, parameters.projectPath, i
+        )
         print("minitSNE done, finding embeddings now.")
         print(datetime.now().strftime("%m-%d-%Y_%H-%M"))

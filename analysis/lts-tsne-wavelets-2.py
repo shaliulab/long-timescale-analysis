@@ -44,5 +44,6 @@ if __name__ == "__main__":
 
     if not os.path.exists(tsnefolder + "training_tsne_embedding.mat"):
         print("Calculating wavelets...")
-        mmpy.get_wavelets(projectionFiles, parameters, i)
+        mmpy.get_wavelets(projectionFiles, parameters, i, ls=True)
+        # mmpy.get_wavelets_lombscargle(projectionFiles, parameters, i)
         print(datetime.now().strftime("%m-%d-%Y_%H-%M"))

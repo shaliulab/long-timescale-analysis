@@ -11,13 +11,13 @@ sys.path.append("..")
 import argparse
 import glob
 import logging
-from pathlib import Path
 import pathlib
-import pandas as pd
+from pathlib import Path
 
 import h5py
 import natsort
 import numpy as np
+import pandas as pd
 import utils.motionmapperpy.motionmapperpy as mmpy
 import utils.trx_utils as trx_utils
 
@@ -54,27 +54,39 @@ if __name__ == "__main__":
         filenames = glob.glob(base_path + "/*vars.h5")
         filenames = natsort.natsorted(filenames)
         filename = filenames[number]
-        
+
         logger.info(filename)
         with h5py.File(filename, "r") as f:
             dset_names = list(f.keys())
             locations = f["tracks"][:].T
         logger.info("Loaded tracks...")
 
-        metadata = pd.read_csv("/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/data_index.csv")
+        metadata = pd.read_csv(
+            "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/data_index.csv"
+        )
         metadata = metadata[metadata["Fly id"].notnull()]
-        metadata["date"] = pd.to_datetime(metadata['Date'], format='%m/%d/%Y').dt.strftime('%Y%m%d')
+        metadata["date"] = pd.to_datetime(
+            metadata["Date"], format="%m/%d/%Y"
+        ).dt.strftime("%Y%m%d")
         metadata["within_arena_id"] = (metadata["Fly id"].astype(int) - 1) % 4
-        metadata["death_day"] = (metadata["Collapse (hours into video)"] // 24).astype(int)
-        metadata["death_frame_in_death_day"] = ((metadata["Collapse (hours into video)"] % 24) * 60 * 60 * 99.96).astype(int)
+        metadata["death_day"] = (metadata["Collapse (hours into video)"] // 24).astype(
+            int
+        )
+        metadata["death_frame_in_death_day"] = (
+            (metadata["Collapse (hours into video)"] % 24) * 60 * 60 * 99.96
+        ).astype(int)
         metadata["cam_num"] = metadata["Camera"].str.replace("Camera ", "").astype(int)
-        
+
         # get day from filename
         day = int(pathlib.Path(filename).name.split("_")[1].replace("day", ""))
-        cam_number = int(pathlib.Path(filename).name.split("_")[0].split("-")[2].replace("cam", ""))
+        cam_number = int(
+            pathlib.Path(filename).name.split("_")[0].split("-")[2].replace("cam", "")
+        )
         date = pathlib.Path(filename).name.split("-")[0]
 
-        locations[:, 0:13, :] = trx_utils.fill_missing(locations[:, 0:13, :], kind="pchip", limit=5)
+        locations[:, 0:13, :] = trx_utils.fill_missing(
+            locations[:, 0:13, :], kind="pchip", limit=5
+        )
         # logger.info("Filled missing data with median...")
         locations[:, node_names.index("head"), :, :] = trx_utils.fill_missing(
             locations[:, node_names.index("head"), :, :], kind="pchip"
@@ -95,8 +107,10 @@ if __name__ == "__main__":
         locations = trx_utils.smooth_median(locations, window=5)
         locations = trx_utils.smooth_gaussian(locations)
         instance_count = 4
-        
-        matching_rows = metadata[(metadata["date"].astype(str) == date) & (metadata["cam_num"] == cam_number)]
+
+        matching_rows = metadata[
+            (metadata["date"].astype(str) == date) & (metadata["cam_num"] == cam_number)
+        ]
         if len(matching_rows) == 0:
             raise Exception(f"No matching rows! Something is wrong with {filename}!")
 
@@ -109,21 +123,25 @@ if __name__ == "__main__":
             matching_row = matching_rows[matching_rows["within_arena_id"] == i]
             logger.info(f"Matching metadata: {matching_row}")
             if len(matching_rows) == 0:
-                raise Exception(f"No matching rows! Something is wrong with {filename} on individual {i}!")
+                raise Exception(
+                    f"No matching rows! Something is wrong with {filename} on individual {i}!"
+                )
             if day > (matching_row["death_day"].values[0] + 1):
                 logger.info("Skipping because it's after the death day!")
                 continue
-            elif day == (matching_row["death_day"].values[0]+1):
+            elif day == (matching_row["death_day"].values[0] + 1):
                 cutoff = matching_row["death_frame_in_death_day"].values[0]
                 if cutoff == 0:
                     logger.info("This day the cutoff at 0. Skipping!")
                     continue
-                logger.info(f"Cutting off at {cutoff} for individual {i} in file {filename}!")
+                logger.info(
+                    f"Cutting off at {cutoff} for individual {i} in file {filename}!"
+                )
                 data = data[:cutoff, :, :]
             else:
                 logger.info(f"Using all frames for individual {i} in file {filename}!")
                 pass
-            
+
             with h5py.File(
                 f"{parameters.projectPath}/Projections/{Path(Path(filename).stem).stem}-{i}-processed-tracks.h5",
                 "w",
@@ -143,7 +161,7 @@ if __name__ == "__main__":
                 ],
                 axis=1,
             )
-            
+
             logger.info("Shape before masking: %s", data.shape)
             mask = np.all(np.isnan(data[:, :, 0]) | np.equal(data[:, :, 0], 0), axis=1)
             # missingness_mask = np.sum(np.isnan(data[:, :, 0]) | np.equal(data[:, :, 0], 0), axis=1) > 6
@@ -171,9 +189,15 @@ if __name__ == "__main__":
                 f"{parameters.projectPath}/Projections/{Path(Path(filename).stem).stem}-{i}-pcaModes.mat",
                 "w",
             ) as f:
-                dset = f.create_dataset("projections", data=reshaped_data.T, compression="lzf")
+                dset = f.create_dataset(
+                    "projections", data=reshaped_data.T, compression="lzf"
+                )
 
-            edge_file = '../data/edge/' + '-'.join(Path(filename).stem.split('-')[:3]) + '_edge.mat'
+            edge_file = (
+                "../data/edge/"
+                + "-".join(Path(filename).stem.split("-")[:3])
+                + "_edge.mat"
+            )
             with h5py.File(edge_file, "r") as hfile:
                 edge_mask = np.append([False], hfile["edger"][:].T[:, i].astype(bool))
 
@@ -183,13 +207,15 @@ if __name__ == "__main__":
                 "w",
             ) as f:
                 dset = f.create_dataset("tracks", data=data.T, compression="lzf")
-                dset = f.create_dataset("missing_data_indices", data=mask, compression="lzf")
+                dset = f.create_dataset(
+                    "missing_data_indices", data=mask, compression="lzf"
+                )
                 dset = f.create_dataset("edge_calls", data=edge_mask, compression="lzf")
             # savemat(
             #     f'{projectPath}/Projections/{Path(filename).stem}-{i}-pcaModes.mat',
             #     {"projections": data},
             # )
-            with open('files_processed_complete.txt', 'a') as f:
+            with open("files_processed_complete.txt", "a") as f:
                 f.write(f"{filename}, {i}\n")
             continue
 

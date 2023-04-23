@@ -1,14 +1,13 @@
-import h5py
-import numpy as np
+import time
+from pathlib import Path
+
 import h5py
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from pathlib import Path
 from tqdm import tqdm
-import time
 
 # z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_all_filtered/TSNE/20221130_sigma1_55_regions50_zVals_wShed_groups.mat"
 z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230210-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/TSNE/20230215_sigma1_7_minregions50_zVals_wShed_groups_finalsave.mat"
@@ -82,13 +81,13 @@ for region, list_of_wlets in tqdm(output.items()):
     for i, node_mean_amps in enumerate(split_to_nodes):
         resulting_numpy[i, :] = node_mean_amps
     fig, ax = plt.subplots(figsize=(10, 5))
-    ax.imshow(resulting_numpy, aspect="auto");
-    ax.set_xticks([0, 5, 10, 15, 20, 24]);
-    ax.set_xticklabels(["%0.1f" % freqs[j] for j in [0, 5, 10, 15, 20, 24]]);
-    ax.set_yticks(np.arange(24));
-    ax.set_yticklabels([wlet_nodes[j] for j in np.arange(24)]);
+    ax.imshow(resulting_numpy, aspect="auto")
+    ax.set_xticks([0, 5, 10, 15, 20, 24])
+    ax.set_xticklabels(["%0.1f" % freqs[j] for j in [0, 5, 10, 15, 20, 24]])
+    ax.set_yticks(np.arange(24))
+    ax.set_yticklabels([wlet_nodes[j] for j in np.arange(24)])
     figures_path = Path(f"figures/fingerprints/{time.strftime('%Y%m%d')}")
-    figures_dir = Path.mkdir(figures_path, exist_ok=True,parents=True)
+    figures_dir = Path.mkdir(figures_path, exist_ok=True, parents=True)
     fig.savefig(
         f"{str(figures_path)}/region{region}-wavelet-example-by-part.png",
         dpi=600,

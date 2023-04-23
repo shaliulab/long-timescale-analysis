@@ -1,19 +1,16 @@
+from pathlib import Path
 
 import dill
 import h5py
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.style
-
-
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib import patches
 from matplotlib.patches import Circle
 from scipy.io import loadmat
-from pathlib import Path
-
 
 # %matplotlib inline
 
@@ -37,12 +34,10 @@ def encode_list(s_list):
     return [[len(list(group)), key[0]] for key, group in groupby(s_list)]
 
 
-
 import sys
 
 sys.path.append("../")
 import analysis.utils.trx_utils as trx_utils
-
 
 nn_filename = "/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_tracks/20220217-lts-cam1/cam1_20220217_0through190_cam1_20220217_0through190_1-tracked.analysis.h5"
 filename = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day1_24hourvars.h5"
@@ -61,7 +56,8 @@ z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_
 with h5py.File(z_vals_file, "r") as f:
     z_val_names_dset = f["zValNames"]
     references = [
-        f[z_val_names_dset[dset_idx][0]] for dset_idx in range(z_val_names_dset.shape[0])
+        f[z_val_names_dset[dset_idx][0]]
+        for dset_idx in range(z_val_names_dset.shape[0])
     ]
     z_val_names = ["".join(chr(i) for i in obj[:]) for obj in references]
     z_lens = [l[0] for l in f["zValLens"][:]]
@@ -112,16 +108,15 @@ with h5py.File(
         fly_id_trx = fly_idx
         rle_list = encode_list(
             f["watershedRegions"][
-                d[
+                d[f"20220217-lts-cam1_day1_24hourvars-{fly_id_mm}-pcaModes"][0] : d[
                     f"20220217-lts-cam1_day1_24hourvars-{fly_id_mm}-pcaModes"
-                ][0] : d[
-                    f"20220217-lts-cam1_day1_24hourvars-{fly_id_mm}-pcaModes"
-                ][
-                    1
-                ]
+                ][1]
             ]
         )
-        dict_rle = {"number": [p[1] for p in rle_list], "length": [p[0] for p in rle_list]}
+        dict_rle = {
+            "number": [p[1] for p in rle_list],
+            "length": [p[0] for p in rle_list],
+        }
         df = pd.DataFrame(dict_rle)
         # Get the end
         df["end"] = np.cumsum(df.length)
@@ -136,7 +131,9 @@ with h5py.File(
         Path("analysis/brady50").mkdir(parents=True, exist_ok=True)
         for region in range(0, np.unique(f["watershedRegions"][:]).shape[0]):
             try:
-                subset = df[(df.number == region) & (df.end < 360000) & (df.length >= 10)].sort_values(by=['length'],ascending=False)[0:3]
+                subset = df[
+                    (df.number == region) & (df.end < 360000) & (df.length >= 10)
+                ].sort_values(by=["length"], ascending=False)[0:3]
                 for section in subset.iterrows():
                     print(section)
                     start = section[1]["start"]
@@ -158,5 +155,3 @@ with h5py.File(
             except Exception as e:
                 print(f"Failed to plot region {region}")
                 print(e)
-
-

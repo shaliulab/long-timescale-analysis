@@ -53,7 +53,9 @@ if __name__ == "__main__":
             locations = f["tracks"][:].T
         logger.info("Loaded tracks...")
 
-        locations[:, 0:13, :] = trx_utils.fill_missing(locations[:, 0:13, :], kind="pchip", limit=10)
+        locations[:, 0:13, :] = trx_utils.fill_missing(
+            locations[:, 0:13, :], kind="pchip", limit=10
+        )
         logger.info("Filled missing data with median...")
         locations[:, node_names.index("head"), :, :] = trx_utils.fill_missing(
             locations[:, node_names.index("head"), :, :], kind="pchip"
