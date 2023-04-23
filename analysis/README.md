@@ -23,3 +23,5 @@ sbatch input-processing.slurm
 `lts-tsne-input-1.py` which is submitted as a batch job through `input-processing.slurm`. Thjis script takes the .h5 files and converts them to the input type compatible with motionmapperpy. The output is saved in the project directory specificed 
 
 ### Calculating wavelets
+
+

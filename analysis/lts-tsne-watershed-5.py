@@ -39,8 +39,8 @@ del m
 
 mmpy.findWatershedRegions(
     parameters,
-    minimum_regions=50,
-    startsigma=1.5,
+    minimum_regions=75,
+    startsigma=1.2,
     pThreshold=[0.33, 0.67],
     saveplot=True,
     endident="*-pcaModes.mat",

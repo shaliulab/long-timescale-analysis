@@ -103,20 +103,20 @@ for date, date_dict in experimental_dict.items():
             
             for key in day_keys:
                 focal_dset_list.append(fly_dict[key])
-                
-            zvals_indiv = [dset['zvals'] for dset in focal_dset_list]
-            zvals_arr = np.concatenate(zvals_indiv, axis=0)
-            hour_wise = np.array_split(zvals_arr, 24*len(zvals_indiv))
-            for i in range(24):
-                item_cts = np.unique(np.concatenate(hour_wise[i::24]), return_counts=True)
-                item_relative_freq = (item_cts[1] / np.sum(item_cts[1]))*100
-                hour_of_day_wise_dict[date][cam][fly][i] = item_relative_freq
+                zvals_indiv = [dset['zvals'] for dset in focal_dset_list]
+                zvals_arr = np.concatenate(zvals_indiv, axis=0)
+                hour_wise = np.array_split(zvals_arr, 24*len(zvals_indiv))
+                for i in range(24):
+                    item_cts = np.unique(np.concatenate(hour_wise[i::24]), return_counts=True)
+                    item_relative_freq = (item_cts[1] / np.sum(item_cts[1]))*100
+                    hour_of_day_wise_dict[date][cam][fly][day][i] = item_relative_freq
 
 import pathlib
 import time
 
 run_time = int(time.time())
-base_figure_path = pathlib.Path(f"/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/figures/{run_time}")                            
+base_figure_path = pathlib.Path(f"/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/figures/{run_time}")
+base_figure_path.mkdir(parents=True, exist_ok=True)
 
 plt.figure(figsize=(20, 5))
 zt_agg = []
@@ -137,7 +137,7 @@ for date, date_dict in hour_of_day_wise_dict.items():
 freq_agg = [x for _, x in sorted(zip(zt_agg, freq_agg))]
 zt_agg = sorted(zt_agg)
 sns.histplot(x = zt_agg, y = freq_agg, bins=24, stat="probability")
-plt.savefig(bas_figure_path + "hour_of_day_wise_indiv.png")
+plt.savefig(base_figure_path / "hour_of_day_wise_indiv.png")
 
 df = pd.DataFrame(data={'x': zt_agg, 'y': freq_agg})
 bins = range(0,25,1)

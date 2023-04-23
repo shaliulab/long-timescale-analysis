@@ -22,11 +22,11 @@ with h5py.File(z_vals_file, "r") as f:
     z_lens = [l[0] for l in f["zValLens"][:]]
 
 wshedfile = h5py.File(z_vals_file, "r")
-wregs = wshedfile["watershedRegions"][:].flatten()[0:1000000]
-ethogram = np.zeros((wregs.max() + 1, len(wregs)))
+wregs = wshedfile["watershedRegions"][:].flatten()[0:100000000]
+# ethogram = np.zeros((wregs.max() + 1, len(wregs)))
 
-for wreg in range(1, wregs.max() + 1):
-    ethogram[wreg, np.where(wregs == wreg)[0]] = 1.0
+# for wreg in range(1, wregs.max() + 1):
+#     ethogram[wreg, np.where(wregs == wreg)[0]] = 1.0
 ethogram_split = np.split(wregs, np.cumsum(wshedfile["zValLens"][:].flatten())[:-1])
 
 ethogram_dict = {k: v for k, v in zip(z_val_names, ethogram_split)}
@@ -50,8 +50,16 @@ for file in tqdm(list(ethogram_dict.keys())[0:12]):
             freqs = f["f"][:]
     for region in np.arange(0, N_REGIONS):
         region_idx = np.where(ethogram_dict[file] == region)[0]
-        print(f"Region {region}")
-        output[region].append(wavelet[region_idx])
+        print(f"Appending output -- region {region}")
+        if output[region] == []:
+            print(f"Appending output -- region {region} in file {file} -- first time")
+            output[region].append(wavelet[region_idx])
+            continue
+        if output[region] is not [] and np.concatenate(output[region]).shape[0] > 1000000:
+            print(f"Skipping region {region} because it already has 10000000 samples -- {np.concatenate(output[region]).shape[0]}")
+            continue
+        else:
+            output[region].append(wavelet[region_idx])
 
 
 # Setup info
@@ -74,7 +82,7 @@ mpl.style.use("seaborn-deep")
 
 # Plot wavelets
 for region, list_of_wlets in tqdm(output.items()):
-    print(f"Region {region}")
+    print(f"Plotting region {region}")
     region_wavelets = np.concatenate(list_of_wlets)
     mean_amps = np.mean(region_wavelets, axis=0)
     split_to_nodes = np.array_split(mean_amps, 24)
@@ -87,10 +95,10 @@ for region, list_of_wlets in tqdm(output.items()):
     ax.set_xticklabels(["%0.1f" % freqs[j] for j in [0, 5, 10, 15, 20, 24]]);
     ax.set_yticks(np.arange(24));
     ax.set_yticklabels([wlet_nodes[j] for j in np.arange(24)]);
-    figures_path = Path(f"figures/fingerprints/{time.strftime('%Y%m%d')}")
-    figures_dir = Path.mkdir(figures_path, exist_ok=True,parents=True)
+    figures_path = Path("figures/fingerprints/trial11_1m/")
+    figures_path.mkdir(parents=True, exist_ok=True)
     fig.savefig(
-        f"{str(figures_path)}/region{region}-wavelet-example-by-part.png",
+        figures_path / f"region{region}-wavelet-example-by-part.png",
         dpi=600,
         bbox_inches="tight",
     )

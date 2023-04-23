@@ -4,7 +4,7 @@
 #SBATCH --error=logs/batch-%A-%a.err   # STDERR file
 #SBATCH --nodes=1               # Node count
 #SBATCH --ntasks=1          # Number of tasks across all nodes
-#SBATCH --cpus-per-task=16      # Cores per task (>1 if multi-threaded tasks)
+#SBATCH --cpus-per-task=2      # Cores per task (>1 if multi-threaded tasks)
 #SBATCH --mem=196G           # total memory per node
 #SBATCH --array=1-78         # Array range
 #SBATCH --time=06:00:00          # Run time limit (HH:MM:SS)        # Job array

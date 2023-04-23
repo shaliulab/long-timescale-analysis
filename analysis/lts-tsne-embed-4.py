@@ -57,7 +57,7 @@ if __name__ == "__main__":
     else:
         zValstr = "uVals"
 
-    print("Finding Embeddings")
+    print(f"Finding Embeddings for {projectionFiles[args.number]}")
     # print("%i/%i : %s" % (args.number + 1, len(projectionFiles), projectionFiles[i]))
     if os.path.exists(projectionFiles[args.number][:-4] + "_%s.mat" % (zValstr)):
         print("Already done. Skipping.\n")
