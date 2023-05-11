@@ -11,12 +11,8 @@ import natsort
 import utils.motionmapperpy.motionmapperpy as mmpy
 from tqdm import tqdm
 
-# parser = argparse.ArgumentParser(description='Bulk embeddings')
-# parser.add_argument("--number",type=int)
 
 if __name__ == "__main__":
-    # args = parser.parse_args()
-    # i = args.number
     parameters = mmpy.setRunParameters()
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     print("Found {} projection files".format(len(projectionFiles)))

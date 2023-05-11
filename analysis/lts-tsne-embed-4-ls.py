@@ -22,7 +22,7 @@ if __name__ == "__main__":
     # i = args.number
 
     parameters = mmpy.setRunParameters()
-    # parmeters.projectPath = "/home/alexgonzalez/Documents/Data/LTS5/2019-11-20/2019-11-20_15-00-00"
+    # parameters.projectPath = "20230428-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle"
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     projectionFiles = natsort.natsorted(projectionFiles)
     with h5py.File(projectionFiles[args.number], "r") as f:

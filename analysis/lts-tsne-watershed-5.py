@@ -27,20 +27,20 @@ from seaborn.distributions import distplot
 from tqdm import tqdm
 
 parameters = mmpy.setRunParameters()
-
+# parameters.projectPath = "20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian"
 projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
 projectionFiles = natsort.natsorted(projectionFiles)
 m = h5py.File(projectionFiles[0], "r")["projections"]
 # %%%%%
-parameters.pcaModes = m.shape[1]  #%Number of PCA projections in saved files.
+parameters.pcaModes = m.shape[1] # %Number of PCA projections in saved files.
 parameters.numProjections = parameters.pcaModes
 # %%%%%
 del m
 
 mmpy.findWatershedRegions(
     parameters,
-    minimum_regions=75,
-    startsigma=1.2,
+    minimum_regions=30,
+    startsigma=.35,
     pThreshold=[0.33, 0.67],
     saveplot=True,
     endident="*-pcaModes.mat",

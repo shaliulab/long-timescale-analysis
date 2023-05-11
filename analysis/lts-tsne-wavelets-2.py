@@ -17,7 +17,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     i = args.number
     parameters = mmpy.setRunParameters()
-
+    # parameters.projectPath = "20230426-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-medianwin5-gaussian"
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     projectionFiles = natsort.natsorted(projectionFiles)
     print(projectionFiles[0])
@@ -30,7 +30,6 @@ if __name__ == "__main__":
     parameters.numProjections = parameters.pcaModes
     # %%%%%
     del m
-
     print(datetime.now().strftime("%m-%d-%Y_%H-%M"))
     print("tsneStarted")
 
@@ -45,5 +44,4 @@ if __name__ == "__main__":
     if not os.path.exists(tsnefolder + "training_tsne_embedding.mat"):
         print("Calculating wavelets...")
         mmpy.get_wavelets(projectionFiles, parameters, i, ls=True)
-        # mmpy.get_wavelets_lombscargle(projectionFiles, parameters, i)
         print(datetime.now().strftime("%m-%d-%Y_%H-%M"))

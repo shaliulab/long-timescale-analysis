@@ -10,7 +10,7 @@ import seaborn as sns
 from tqdm import tqdm
 
 # z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_all_filtered/TSNE/20221130_sigma1_55_regions50_zVals_wShed_groups.mat"
-z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230210-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/TSNE/20230215_sigma1_7_minregions50_zVals_wShed_groups_finalsave.mat"
+z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian/TSNE/20230501_sigma0_45_minregions30_zVals_wShed_groups_finalsave.mat"
 with h5py.File(z_vals_file, "r") as f:
     z_val_names_dset = f["zValNames"]
     references = [
@@ -21,7 +21,7 @@ with h5py.File(z_vals_file, "r") as f:
     z_lens = [l[0] for l in f["zValLens"][:]]
 
 wshedfile = h5py.File(z_vals_file, "r")
-wregs = wshedfile["watershedRegions"][:].flatten()[0:100000000]
+wregs = wshedfile["watershedRegions"][:].flatten()[0:10000000]
 # ethogram = np.zeros((wregs.max() + 1, len(wregs)))
 
 # for wreg in range(1, wregs.max() + 1):
@@ -34,10 +34,10 @@ ethogram_dict = {k: v for k, v in zip(z_val_names, ethogram_split)}
 from collections import defaultdict
 
 output = defaultdict(list)
-N_REGIONS = 50
-
+N_REGIONS = 30
+# /Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian/TSNE/20230501_sigma0_45_minregions30_zVals_wShed_groups_finalsave.mat
 ROOT_DIR = Path(
-    "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230210-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/Wavelets/"
+    "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian/Wavelets/"
 )
 
 freqs = None
@@ -99,11 +99,13 @@ for region, list_of_wlets in tqdm(output.items()):
     ax.set_xticklabels(["%0.1f" % freqs[j] for j in [0, 5, 10, 15, 20, 24]])
     ax.set_yticks(np.arange(24))
     ax.set_yticklabels([wlet_nodes[j] for j in np.arange(24)])
-    figures_path = Path("figures/fingerprints/trial11_1m/")
+    figures_path = Path("figures/fingerprints/20230508-ls-30region/")
     figures_path.mkdir(parents=True, exist_ok=True)
+    fig.colorbar()
     fig.savefig(
         figures_path / f"region{region}-wavelet-example-by-part.png",
         dpi=600,
         bbox_inches="tight",
     )
+    # color_bar
     plt.close()

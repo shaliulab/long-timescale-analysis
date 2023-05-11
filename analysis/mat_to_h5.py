@@ -13,7 +13,6 @@ from pathlib import Path
 
 import h5py
 import natsort
-import utils.trx_utils as trx_utils
 from tqdm import tqdm
 
 logging.basicConfig(
@@ -24,7 +23,8 @@ logging.basicConfig(
 
 logger = logging.getLogger("analysis_logger")
 
-base_path = "/Genomics/ayroleslab2/scott/grace_metrics"
+# base_path = "/Genomics/ayroleslab2/scott/grace_metrics"
+base_path = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis"
 filenames = glob.glob(base_path + "/*.mat")
 filenames = natsort.natsorted(filenames)
 logger.info(filenames)
@@ -38,14 +38,9 @@ for filename in tqdm(filenames):
         locations = f["day_raw_tracks"][:].T
         logger.info("Loaded tracks...")
         logger.info("Shape of raw locations: %s", locations.shape)
-    # locations = trx_utils.fill_missing(locations, kind="linear", limit=10)
-    # locations = trx_utils.smooth_median(locations)
+        
     logger.info("Shape of locations: %s", locations.shape)
-    # vels = trx_utils.instance_node_velocities(locations, 0, locations.shape[0])
 
-    # logger.info("Writing file...")
+    logger.info("Writing file...")
     with h5py.File(f"{Path(filename).stem}.h5", "w") as f:
         f.create_dataset("tracks", data=locations.T, compression="lzf")
-        # f.create_dataset("vels", data=vels.T, compression="lzf")
-
-# %%
