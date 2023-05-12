@@ -32,7 +32,7 @@ projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat
 projectionFiles = natsort.natsorted(projectionFiles)
 m = h5py.File(projectionFiles[0], "r")["projections"]
 # %%%%%
-parameters.pcaModes = m.shape[1] # %Number of PCA projections in saved files.
+parameters.pcaModes = m.shape[1]  # %Number of PCA projections in saved files.
 parameters.numProjections = parameters.pcaModes
 # %%%%%
 del m
@@ -40,7 +40,7 @@ del m
 mmpy.findWatershedRegions(
     parameters,
     minimum_regions=30,
-    startsigma=.35,
+    startsigma=0.35,
     pThreshold=[0.33, 0.67],
     saveplot=True,
     endident="*-pcaModes.mat",

@@ -38,7 +38,7 @@ for filename in tqdm(filenames):
         locations = f["day_raw_tracks"][:].T
         logger.info("Loaded tracks...")
         logger.info("Shape of raw locations: %s", locations.shape)
-        
+
     logger.info("Shape of locations: %s", locations.shape)
 
     logger.info("Writing file...")

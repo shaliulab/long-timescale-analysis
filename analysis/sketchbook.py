@@ -89,8 +89,8 @@ wavelets = f["wavelets"][
 plt.imshow(wavelets.T, aspect="auto", origin="lower", cmap="viridis")
 plt.savefig("tmp_morlet.png", dpi=300)
 
-import numpy as np
 import mne
+import numpy as np
 
 omega0 = 5
 f = 0.01

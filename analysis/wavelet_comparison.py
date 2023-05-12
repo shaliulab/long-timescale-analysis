@@ -1,6 +1,6 @@
 import h5py
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 example_file = "/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_tracks/20220217-lts-cam1/cam1_20220217_0through190_cam1_20220217_0through190_100-tracked.analysis.h5"
 with h5py.File(example_file, "r") as f:

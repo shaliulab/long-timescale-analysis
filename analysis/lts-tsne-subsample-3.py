@@ -11,7 +11,6 @@ import natsort
 import utils.motionmapperpy.motionmapperpy as mmpy
 from tqdm import tqdm
 
-
 if __name__ == "__main__":
     parameters = mmpy.setRunParameters()
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
