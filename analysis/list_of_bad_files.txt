@@ -57,3 +57,12 @@
 20230103-mmpy-lts-day1-headprobinterp-pchiplimit10-setnanmedian/Projections/20220217-lts-cam4_day1_24hourvars-0-pcaModes.mat 
 20230103-mmpy-lts-day1-headprobinterp-pchiplimit10-setnanmedian/Projections/20220217-lts-cam4_day1_24hourvars-2-pcaModes.mat 
 20230103-mmpy-lts-day1-headprobinterp-pchiplimit10-setnanmedian/Projections/20220217-lts-cam4_day1_24hourvars-2-pcaModes.mat 
+20230210-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/Projections/20220217-lts-cam1_day5_24hourvars-0-pcaModes.mat 
+20230210-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/Projections/20220217-lts-cam1_day5_24hourvars-1-pcaModes.mat 
+20230409-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/Projections/20220217-lts-cam1_day6_24hourvars-0-pcaModes.mat 
+20230409-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/Projections/20220418-lts-cam4_day7_24hourvars-1-pcaModes.mat 
+20230409-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/Projections/20220418-lts-cam4_day7_24hourvars-1-pcaModes.mat 
+20230409-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/Projections/20220418-lts-cam4_day7_24hourvars-1-pcaModes.mat 
+20230409-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/Projections/20220418-lts-cam4_day7_24hourvars-1-pcaModes.mat 
+20230426-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-medianwin5-gaussian/Projections/20220418-lts-cam4_day7_24hourvars-1-pcaModes.mat 
+20230428-mmpy-lts-all-pchip5-headprobinterp-fillnanmedian-medianwin5-gaussian-cwt/Projections/20220418-lts-cam4_day7_24hourvars-1-pcaModes.mat 

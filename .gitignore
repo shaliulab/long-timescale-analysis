@@ -197,3 +197,5 @@ analysis/archive/
 analysis/data/
 analysis/matlab_mmpy/
 .vscode
+analysis/notebooks/figures/
+analysis/*/UMAP/

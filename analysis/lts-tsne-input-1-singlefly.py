@@ -11,7 +11,6 @@ sys.path.append("..")
 import argparse
 import glob
 import logging
-import pathlib
 from pathlib import Path
 
 import h5py

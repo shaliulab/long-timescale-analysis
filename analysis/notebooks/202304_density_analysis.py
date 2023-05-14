@@ -1,10 +1,9 @@
 import h5py
+import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 import utils.motionmapperpy.motionmapperpy as mmpy
 import utils.motionmapperpy.motionmapperpy.mmutils as mmutils
-
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # results_path = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230409-mmpy-lts-all-headprobinterp-missingness-pchip5-fillnanmedian-setnonfinite0-removegt1missing/TSNE/20230418_sigma1_3_minregions75_zVals_wShed_groups.mat"
 results_path = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian/TSNE/training_embedding.mat"
