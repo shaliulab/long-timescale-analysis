@@ -199,3 +199,4 @@ analysis/matlab_mmpy/
 .vscode
 analysis/notebooks/figures/
 analysis/*/UMAP/
+**/*nfs*

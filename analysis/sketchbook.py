@@ -110,3 +110,58 @@ omega0 = 20
 scales = (omega0 + np.sqrt(2 + omega0**2)) / (4 * np.pi * f)
 window_sizes = scales * 100
 np.round(window_sizes).astype(int)
+
+
+#
+
+
+import h5py
+import numpy as np
+
+z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230509-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-win50-singleflysampledtracks-noyprob/UMAP/20230509_sigma2_55_minregions30_zVals_wShed_groups_finalsave.mat"
+
+with h5py.File(z_vals_file, "r") as f:
+    z_val_names_dset = f["zValNames"]
+    references = [
+        f[z_val_names_dset[dset_idx][0]]
+        for dset_idx in range(z_val_names_dset.shape[0])
+    ]
+    z_val_names = ["".join(chr(i) for i in obj[:]) for obj in references]
+    z_lens = [l[0] for l in f["zValLens"][:]]
+
+wshedfile = h5py.File(z_vals_file, "r")
+wregs = wshedfile["watershedRegions"][:].flatten()
+ethogram = np.zeros((wregs.max() + 1, len(wregs)))
+ethogram_split = np.split(wregs, np.cumsum(wshedfile["zValLens"][:].flatten())[:-1])
+ethogram_dict = {k: v for k, v in zip(z_val_names, ethogram_split)}
+
+
+import h5py
+import numpy as np
+
+# Open the h5 file
+file = h5py.File(
+    "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230514-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/20230515_sigma1_05_minregions100_zVals_wShed_groups_finalsave.mat",
+    "r",
+)
+
+# Access the dataset
+wbounds_dataset = file["wbounds"]
+
+# Extract the object references
+object_refs = wbounds_dataset[:]
+
+# Unpack the object references
+x_ref = object_refs[0, 0]
+y_ref = object_refs[1, 0]
+
+# Access the actual data
+x_data = file[x_ref][:]
+y_data = file[y_ref][:]
+
+# Close the file
+file.close()
+
+# Access the unpacked data
+print("x values:", x_data)
+print("y values:", y_data)

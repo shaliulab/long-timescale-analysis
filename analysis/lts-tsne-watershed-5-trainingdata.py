@@ -25,6 +25,9 @@ from matplotlib.colors import ListedColormap
 from scipy.io import loadmat, savemat
 from seaborn.distributions import distplot
 from tqdm import tqdm
+import importlib
+
+# importlib.reload(mmpy)
 
 parameters = mmpy.setRunParameters()
 # parameters.projectPath = "20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian"
@@ -37,14 +40,11 @@ parameters.numProjections = parameters.pcaModes
 # %%%%%
 del m
 
-mmpy.findWatershedRegions(
+mmpy.findWatershedRegions_training(
     parameters,
     minimum_regions=100,
-    startsigma=0.5,
+    startsigma=1,
     pThreshold=[0.33, 0.67],
     saveplot=True,
-    endident="*-pcaModes.mat",
-    prev_wshed_file="/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230514-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/20230521_sigma1_minregions100_zVals_wShed_groups.mat",
+    endident="embedding.mat",
 )
-
-# %%

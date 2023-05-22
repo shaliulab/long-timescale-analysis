@@ -150,7 +150,7 @@ for date, date_dict in hour_of_day_wise_dict.items():
 freq_agg = [x for _, x in sorted(zip(zt_agg, freq_agg))]
 zt_agg = sorted(zt_agg)
 sns.histplot(x=zt_agg, y=freq_agg, bins=24, stat="probability")
-plt.savefig(bas_figure_path + "hour_of_day_wise_indiv.png")
+plt.savefig(base_figure_path + "hour_of_day_wise_indiv.png")
 
 df = pd.DataFrame(data={"x": zt_agg, "y": freq_agg})
 bins = range(0, 25, 1)

@@ -1,53 +1,17 @@
-from pathlib import Path
-
-import dill
-import h5py
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-
-# %%
 import numpy as np
-import pandas as pd
-from scipy.io import loadmat
-import sys
 import h5py
-from itertools import groupby
-import analysis.utils.trx_utils as trx_utils
-import importlib
+import cv2
+import imageio
+import re
+from natsort import natsorted
+import imageio
+import os
+import multiprocessing
 
+imageio.plugins.ffmpeg.download()
 
-mpl.rcParams["figure.facecolor"] = "w"
-mpl.rcParams["figure.dpi"] = 150
-mpl.rcParams["savefig.dpi"] = 600
-mpl.rcParams["savefig.transparent"] = True
-mpl.rcParams["font.size"] = 15
-mpl.rcParams["font.family"] = "sans-serif"
-mpl.rcParams["font.sans-serif"] = ["Arial", "DejaVu Sans"]
-mpl.rcParams["axes.titlesize"] = "xx-large"  # medium, large, x-large, xx-large
-mpl.style.use("seaborn-deep")
-
-
-def encode_list(s_list):
-    return [[len(list(group)), key[0]] for key, group in groupby(s_list)]
-
-
-sys.path.append("../")
-
-
-# %%
-nn_filename = "/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_tracks/20220217-lts-cam1/cam1_20220217_0through190_cam1_20220217_0through190_1-tracked.analysis.h5"
-filename = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day1_24hourvars.h5"
-
-
-with h5py.File(nn_filename, "r") as f:
-    dset_names = list(f.keys())
-    locations = f["tracks"][:].T
-    node_names = [n.decode() for n in f["node_names"][:]]
-
-with h5py.File(filename, "r") as f:
-    locations = f["tracks"][:].T
-
-z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_1d_subset/TSNE/zVals_wShed_groups.mat"
+# Load the data
+z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230514-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/20230521_minregions100_zVals_wShed_groups_prevwshed_finalsave.mat"
 with h5py.File(z_vals_file, "r") as f:
     z_val_names_dset = f["zValNames"]
     references = [
@@ -57,97 +21,318 @@ with h5py.File(z_vals_file, "r") as f:
     z_val_names = ["".join(chr(i) for i in obj[:]) for obj in references]
     z_lens = [l[0] for l in f["zValLens"][:]]
 
-d = {}
-for z_val_name_idx, _ in enumerate(z_val_names):
-    d[z_val_names[z_val_name_idx]] = [
-        np.sum(z_lens[:(z_val_name_idx)]),
-        np.sum(z_lens[: (z_val_name_idx + 1)]),
-    ]
-d[z_val_names[0]][0] = 0
+wshedfile = h5py.File(z_vals_file, "r")
+wregs = wshedfile["watershedRegions"][:].flatten()
+ethogram = np.zeros((wregs.max() + 1, len(wregs)))
+ethogram_split = np.split(wregs, np.cumsum(wshedfile["zValLens"][:].flatten())[:-1])
+ethogram_dict = {k: v for k, v in zip(z_val_names, ethogram_split)}
 
 
-print("===filename===")
-print(filename)
-print()
+def run_length_encoding(sequence):
+    """
+    Identify runs in the sequence
+    """
+    values = []
+    starts = []
+    lengths = []
 
-print("===HDF5 datasets===")
-print(dset_names)
-print()
+    current_value = None
+    current_start = None
+    current_length = 0
 
-print("===locations data shape===")
-print(locations.shape)
-print()
+    for i, value in enumerate(sequence):
+        if current_value is None:
+            current_value = value
+            current_start = i
+            current_length = 1
+        elif current_value == value:
+            current_length += 1
+        else:
+            values.append(current_value)
+            starts.append(current_start)
+            lengths.append(current_length)
+            current_value = value
+            current_start = i
+            current_length = 1
 
-print("===nodes===")
-for i, name in enumerate(node_names):
-    print(f"{i}: {name}")
-print()
+    values.append(current_value)
+    starts.append(current_start)
+    lengths.append(current_length)
 
-# filtered_locations = trx_utils.fill_missing_np(locations)
-# filtered_locations = trx_utils.smooth_median(filtered_locations)
-# filtered_locations = trx_utils.smooth_gaussian(filtered_locations)
-filtered_locations = locations
-# %%
+    return np.array(values), np.array(starts), np.array(lengths)
 
-importlib.reload(trx_utils)
 
-# %%
-videofile = "/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_videos/20220217-lts-cam1/20220217-lts-cam1-0000.mp4"
-min_length = 25
-with h5py.File(
-    "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/mmpy_lts_1d_subset/TSNE/zVals_wShed_groups.mat"
-) as f:
-    for fly_idx in range(4):
-        fly_id_mm = fly_idx
-        fly_id_trx = fly_idx
-        rle_list = encode_list(
-            f["watershedRegions"][
-                d[f"20220217-lts-cam1_day1_24hourvars-{fly_id_mm}-pcaModes"][0] : d[
-                    f"20220217-lts-cam1_day1_24hourvars-{fly_id_mm}-pcaModes"
-                ][1]
+def get_video_file(key):
+    """
+    Returns the path to the video file corresponding to the given key.
+    """
+    # Extract the flid number and sample number from the key
+    flid_number, sample_number = re.match(r"flid_(\d+)samp_(\d+)", key).groups()
+
+    # Get the base directory
+    base_dir = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/data/brady/brady_sample_vids"
+
+    # Get a list of all folders in the base directory
+    folders = os.listdir(base_dir)
+
+    # Filter folders that end with the flid number
+    folders = [folder for folder in folders if folder.endswith(f"flid{flid_number}")]
+
+    if not folders:
+        raise ValueError(f"No folders found for flid number {flid_number}")
+
+    # For simplicity, we assume there's only one such folder. If there can be more,
+    # you might need additional logic to select the correct one.
+    folder_path = os.path.join(base_dir, folders[0])
+
+    # Get a list of all files in the folder
+    filenames = os.listdir(folder_path)
+
+    # Filter out any non-.mp4 files
+    filenames = [fn for fn in filenames if fn.endswith(".mp4")]
+    filenames = natsorted(filenames)
+
+    # Get the filename for the specified sample
+    video_file = filenames[int(sample_number) - 1]
+
+    # Construct the full path to the video file
+    video_file_path = os.path.join(folder_path, video_file)
+    print(f"key: {key} maps to video file: {video_file_path}")
+    return video_file_path
+
+
+def get_track_file(key):
+    """
+    Returns the path to the track file corresponding to the given key.
+    """
+    file_prefix = key.split("-")[0]
+    print(f"key: {key} maps to track file: {file_prefix}.h5")
+    return f"/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/data/brady/single_sample_tracks/{file_prefix}.h5"
+
+
+for key in ethogram_dict.keys():
+    print(f"Processing key: {key}")
+    values, starts, lengths = run_length_encoding(ethogram_dict[key])
+    ethogram_dict[key] = {"starts": starts, "lengths": lengths, "values": values}
+
+
+def extract_frames(video_file, frame_indices, track_file, crop_size=(128, 128)):
+    frames = []
+
+    with h5py.File(track_file, "r") as track_f:
+        thorax_tracks = track_f["tracks"][:].T[
+            :, 3, :
+        ]  # index 3 corresponds to the thorax
+
+    # Read the video using imageio
+    vid = imageio.get_reader(video_file, "ffmpeg")
+
+    for frame_idx in frame_indices:
+        try:
+            image = vid.get_data(frame_idx)
+
+            # Convert to RGB
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+            # Get thorax position and crop around it
+            thorax_pos = thorax_tracks[frame_idx].astype(int)
+            start_x = max(0, thorax_pos[0] - crop_size[0] // 2)
+            start_y = max(0, thorax_pos[1] - crop_size[1] // 2)
+            image = image[
+                start_y : start_y + crop_size[1], start_x : start_x + crop_size[0]
             ]
-        )
-        dict_rle = {
-            "number": [p[1] for p in rle_list],
-            "length": [p[0] for p in rle_list],
-        }
-        df = pd.DataFrame(dict_rle)
-        # Get the end
-        df["end"] = np.cumsum(df.length)
-        # Get the start
-        df["start"] = df["end"] - df.length
-        _, angles = trx_utils.normalize_to_egocentric(
-            filtered_locations[:, :, :, fly_id_trx],
-            ctr_ind=node_names.index("thorax"),
-            fwd_ind=node_names.index("head"),
-            return_angles=True,
-        )
-        Path("analysis/brady50").mkdir(parents=True, exist_ok=True)
-        for region in range(0, np.unique(f["watershedRegions"][:]).shape[0]):
-            try:
-                subset = df[
-                    (df.number == region) & (df.end < 360000) & (df.length >= 10)
-                ].sort_values(by=["length"], ascending=False)[0:3]
-                for section in subset.iterrows():
-                    print(section)
-                    start = section[1]["start"]
-                    end = section[1]["end"]
-                    print(f"Frames: {start},{end}")
-                    try:
-                        trx_utils.plot_ego(
-                            output_path=f"analysis/brady50/tsne-fly{fly_id_mm}-region{region}-frames{start}to{end}.mp4",
-                            tracks=filtered_locations,
-                            fly_ids=[fly_id_trx],
-                            video_path=videofile,
-                            angles=angles,
-                            frame_start=start,
-                            frame_end=min(end, start + 100),
-                            trail_length=10,
-                        )
-                    except:
-                        print(f"Failed to plot {start},{end}")
-            except Exception as e:
-                print(f"Failed to plot region {region}")
-                print(e)
 
-    # %%
+            frames.append(image)
+        except IndexError:
+            print(f"Frame index {frame_idx} is out of range.")
+
+    return frames
+
+
+# Identifying runs for each behavior (key in the dictionary)
+
+
+def process_behavior(
+    key, data, output_folder, min_frame_length, max_total_frames, target_frames
+):
+    starts, lengths, values = data["starts"], data["lengths"], data["values"]
+    # Sort all by lengths
+    sort_idx = np.argsort(lengths)[::-1]
+    starts = starts[sort_idx]
+    lengths = lengths[sort_idx]
+    values = values[sort_idx]
+    behaviors = np.unique(values)
+    video_file = get_video_file(key)
+    track_file = get_track_file(key)
+    print("Matched video and track files.")
+    print(f"Video file: {video_file}")
+    print(f"Track file: {track_file}")
+    print(f"Key: {key}")
+
+    for behavior in behaviors:
+        total_frames_seen = 0
+        videos_created = 0  # Counter for the number of videos created for the behavior
+        behavior_indices = np.where(values == behavior)[0]
+        # np.random.shuffle(behavior_indices)
+
+        for i in behavior_indices:
+            if total_frames_seen >= target_frames or videos_created >= 10:
+                break
+
+            length = lengths[i]
+            if length > min_frame_length:
+                print(f"Processing key: {key}, behavior: {behavior}, run: {i}")
+                print(f"Start: {starts[i]}, length: {length}, value: {values[i]}")
+
+                # Extract the frame indices for this run
+                frame_indices = range(starts[i], starts[i] + length)
+
+                # Limit the total number of frames
+                if i == 0 and length > max_total_frames:
+                    total_frames = max_total_frames
+                else:
+                    total_frames = min(max_total_frames, length)
+
+                # Adjust the number of frames to reach the target
+                remaining_frames = target_frames - total_frames_seen
+                total_frames = min(total_frames, remaining_frames)
+
+                frame_indices = np.linspace(
+                    starts[i], starts[i] + total_frames - 1, total_frames, dtype=int
+                )
+
+                # Extract and crop the frames
+                frames = extract_frames(video_file, frame_indices, track_file)
+
+                # Determine the size of the output video based on the size of the first frame
+                frame_height, frame_width, _ = frames[0].shape
+                output_size = (frame_width, frame_height)
+
+                # Define the codec and create a VideoWriter object
+                fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+                behavior_id = values[i]
+                output_file = os.path.join(
+                    output_folder,
+                    f"behavior_{behavior_id}",
+                    f"behavior{behavior_id}_start{starts[i]}_end{starts[i]+total_frames}_source{key}.mp4",
+                )
+                print(f"Saving video to: {output_file}")
+                os.makedirs(os.path.dirname(output_file), exist_ok=True)
+                video_writer = cv2.VideoWriter(output_file, fourcc, 100.0, output_size)
+
+                # Write each frame to the video
+                for frame in frames:
+                    # OpenCV expects images in BGR format
+                    frame_bgr = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+                    video_writer.write(frame_bgr)
+
+                video_writer.release()
+
+                # Update the total frames seen and videos created
+                total_frames_seen += total_frames
+                videos_created += 1
+
+
+def save_matching_videos_parallel(
+    output_folder="20230521_awkde_bradies_25",
+    min_frame_length=25,
+    max_total_frames=1000,
+    target_frames=1000,
+):
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Get the number of available cores or limit to 24
+    num_cores = min(multiprocessing.cpu_count(), 8)
+
+    pool = multiprocessing.Pool(processes=num_cores)
+    results = []
+
+    for key, data in ethogram_dict.items():
+        result = pool.apply_async(
+            process_behavior,
+            args=(
+                key,
+                data,
+                output_folder,
+                min_frame_length,
+                max_total_frames,
+                target_frames,
+            ),
+        )
+        results.append(result)
+
+    pool.close()
+    pool.join()
+
+    # Check if any exceptions occurred during processing
+    for result in results:
+        result.get()  # This will raise an exception if one occurred
+
+
+# Call the function
+
+
+import pandas as pd
+
+
+def compute_behavior_fractions(ethogram_dict, max_behavior_code):
+    """
+    Computes the fraction of time spent in each behavior for each key in ethogram_dict.
+    """
+    behavior_fractions = {}
+
+    for key, data in ethogram_dict.items():
+        total_frames = np.sum(data["lengths"])
+
+        behavior_counts = np.zeros(max_behavior_code + 1, dtype=int)
+        for value, length in zip(data["values"], data["lengths"]):
+            behavior_counts[value] += length
+
+        behavior_fractions[key] = behavior_counts / total_frames
+
+    return behavior_fractions
+
+
+def write_behavior_fractions_to_csv(behavior_fractions, filename):
+    """
+    Writes the behavior fractions data to a CSV file.
+    """
+    df = pd.DataFrame(behavior_fractions)
+    df.to_csv(filename, index=True)
+
+
+def compute_overall_behavior_fractions(ethogram_dict, max_behavior_code):
+    """
+    Computes the fraction of time spent in each behavior across all keys in ethogram_dict.
+    """
+    total_frames_all_flies = 0
+    overall_behavior_counts = np.zeros(max_behavior_code + 1, dtype=int)
+
+    for key, data in ethogram_dict.items():
+        total_frames = np.sum(data["lengths"])
+        total_frames_all_flies += total_frames
+
+        for value, length in zip(data["values"], data["lengths"]):
+            overall_behavior_counts[value] += length
+
+    overall_behavior_fractions = overall_behavior_counts / total_frames_all_flies
+
+    return overall_behavior_fractions
+
+
+save_matching_videos_parallel()
+
+max_behavior_code = max(max(data["values"]) for data in ethogram_dict.values())
+behavior_fractions = compute_behavior_fractions(ethogram_dict, max_behavior_code)
+
+write_behavior_fractions_to_csv(behavior_fractions, "behavior_fractions.csv")
+
+overall_behavior_fractions = compute_overall_behavior_fractions(
+    ethogram_dict, max_behavior_code
+)
+
+# Convert the fractions array to a pandas DataFrame with appropriate indices and column names
+df_overall = pd.DataFrame(
+    overall_behavior_fractions, columns=["Overall behavior fractions"]
+)
+df_overall.to_csv("overall_behavior_fractions.csv", index=True)

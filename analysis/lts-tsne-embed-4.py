@@ -18,17 +18,17 @@ parser = argparse.ArgumentParser(description="Bulk embeddings")
 parser.add_argument("--number", type=int)
 
 if __name__ == "__main__":
+    print(f"Starting {datetime.now().strftime('%m-%d-%Y_%H-%M')}")
     args = parser.parse_args()
     # i = args.number
 
     parameters = mmpy.setRunParameters()
-    # parmeters.projectPath = "/home/alexgonzalez/Documents/Data/LTS5/2019-11-20/2019-11-20_15-00-00"
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     projectionFiles = natsort.natsorted(projectionFiles)
     with h5py.File(projectionFiles[args.number], "r") as f:
         m = f["projections"][:].T
     # %%%%%
-    parameters.pcaModes = m.shape[1]  #%Number of PCA projections in saved files.
+    parameters.pcaModes = m.shape[1]  # %Number of PCA projections in saved files.
     parameters.numProjections = parameters.pcaModes
     # %%%%%
     del m
@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     projections[~np.isfinite(projections)] = 1e-12
     projections[projections == 0] = 1e-12
-
+    print("Finding Embeddings...")
     zValues, outputStatistics = mmpy.findEmbeddings(
         projections,
         trainingSetData,
