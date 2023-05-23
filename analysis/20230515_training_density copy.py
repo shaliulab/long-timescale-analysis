@@ -4,15 +4,13 @@ import numpy as np
 import utils.motionmapperpy.motionmapperpy as mmpy
 import matplotlib.pyplot as plt
 import h5py
-from multiprocessing import Pool
 import matplotlib as mpl
-import random
 import copy
 from skimage.segmentation import watershed
 from skimage.filters import roberts
 
 
-training_embeddings_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230514-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/training_embedding.mat"
+training_embeddings_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/training_embedding.mat"
 wshedfile = h5py.File(training_embeddings_file, "r")
 
 zValues = wshedfile["trainingEmbedding"][:].T
@@ -101,9 +99,28 @@ def compute_density_map(zValues, alpha, glob_bw, grid_pts, numPoints):
     return ZZ  # Return the density map for further processing
 
 
+training_data_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/training_data.mat"
+training_data = h5py.File(training_data_file, "r")
+normalized_wavelets = training_data["trainingSetData"][:].T
+
+training_amps_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/training_amps.mat"
+training_amps = h5py.File(training_amps_file, "r")
+amps = training_amps["trainingSetAmps"][:].T
+
+mask = np.sum(normalized_wavelets * amps, axis=1) > 4e2
+print(f"Number of points: {np.sum(mask)}")
+
+zValues = zValues[mask, :]
+
+# bounds, xx, density = mmpy.findPointDensity(
+#     zValues,
+#     numPoints=625,
+#     sigma=1,
+#     rangeVals=[-np.abs(zValues).max() - 15, np.abs(zValues).max() + 15],
+# )
 bounds, xx, density = findPointDensity_awkde(
     zValues,
-    alpha=1,
+    alpha=0.25,
     glob_bw=0.048,
     numPoints=625,
     rangeVals=[-np.abs(zValues).max() - 15, np.abs(zValues).max() + 15],
@@ -111,9 +128,9 @@ bounds, xx, density = findPointDensity_awkde(
 
 
 density_copy = copy.copy(density)
-density_copy[density_copy < 9e-6] = 0
+density_copy[density_copy < 8e-6] = 0
 wshed = watershed(-density_copy, connectivity=10)
-wshed[density_copy < 0.6e-5] = 0
+wshed[density_copy < 8e-6] = 0
 
 numRegs = len(np.unique(wshed)) - 1
 for i, wreg in enumerate(np.unique(wshed)):

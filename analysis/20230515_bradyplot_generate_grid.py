@@ -99,4 +99,4 @@ def make_grids(folder):
 
 
 # Call the function
-make_grids("20230521_awkde_bradies_25")
+make_grids("20230522_awkde_noidle_bradies_25")

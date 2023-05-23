@@ -11,7 +11,7 @@ import multiprocessing
 imageio.plugins.ffmpeg.download()
 
 # Load the data
-z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230514-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/20230521_minregions100_zVals_wShed_groups_prevwshed_finalsave.mat"
+z_vals_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/20230523_minregions100_zVals_wShed_groups_prevregions.mat"
 with h5py.File(z_vals_file, "r") as f:
     z_val_names_dset = f["zValNames"]
     references = [
@@ -161,7 +161,13 @@ def process_behavior(
     starts = starts[sort_idx]
     lengths = lengths[sort_idx]
     values = values[sort_idx]
-    behaviors = np.unique(values)
+
+    unique_values = np.unique(values[~np.isnan(values)])
+    nan_mask = np.isnan(values)
+    behaviors = (
+        np.concatenate((unique_values, [np.nan])) if np.any(nan_mask) else unique_values
+    )
+
     video_file = get_video_file(key)
     track_file = get_track_file(key)
     print("Matched video and track files.")
@@ -172,7 +178,12 @@ def process_behavior(
     for behavior in behaviors:
         total_frames_seen = 0
         videos_created = 0  # Counter for the number of videos created for the behavior
-        behavior_indices = np.where(values == behavior)[0]
+        print(f"Length of values: {len(values)}")
+
+        if np.isnan(behavior):
+            behavior_indices = np.where(np.isnan(values))[0]
+        else:
+            behavior_indices = np.where(values == behavior)[0]
         # np.random.shuffle(behavior_indices)
 
         for i in behavior_indices:
@@ -210,12 +221,13 @@ def process_behavior(
 
                 # Define the codec and create a VideoWriter object
                 fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-                behavior_id = values[i]
+                behavior_id = str(values[i]).replace("nan", "NaN")
                 output_file = os.path.join(
                     output_folder,
                     f"behavior_{behavior_id}",
                     f"behavior{behavior_id}_start{starts[i]}_end{starts[i]+total_frames}_source{key}.mp4",
                 )
+
                 print(f"Saving video to: {output_file}")
                 os.makedirs(os.path.dirname(output_file), exist_ok=True)
                 video_writer = cv2.VideoWriter(output_file, fourcc, 100.0, output_size)
@@ -234,7 +246,7 @@ def process_behavior(
 
 
 def save_matching_videos_parallel(
-    output_folder="20230521_awkde_bradies_25",
+    output_folder="20230522_awkde_noidle_bradies_25",
     min_frame_length=25,
     max_total_frames=1000,
     target_frames=1000,
@@ -275,6 +287,9 @@ def save_matching_videos_parallel(
 import pandas as pd
 
 
+import numpy as np
+
+
 def compute_behavior_fractions(ethogram_dict, max_behavior_code):
     """
     Computes the fraction of time spent in each behavior for each key in ethogram_dict.
@@ -284,11 +299,18 @@ def compute_behavior_fractions(ethogram_dict, max_behavior_code):
     for key, data in ethogram_dict.items():
         total_frames = np.sum(data["lengths"])
 
-        behavior_counts = np.zeros(max_behavior_code + 1, dtype=int)
+        behavior_counts = np.zeros(int(max_behavior_code) + 1, dtype=int)
+        nan_count = 0
         for value, length in zip(data["values"], data["lengths"]):
-            behavior_counts[value] += length
+            if np.isnan(value):
+                nan_count += length
+            else:
+                behavior_counts[int(value)] += length
 
         behavior_fractions[key] = behavior_counts / total_frames
+        behavior_fractions[key] = np.append(
+            behavior_fractions[key], nan_count / total_frames
+        )
 
     return behavior_fractions
 
@@ -301,21 +323,31 @@ def write_behavior_fractions_to_csv(behavior_fractions, filename):
     df.to_csv(filename, index=True)
 
 
+import numpy as np
+
+
 def compute_overall_behavior_fractions(ethogram_dict, max_behavior_code):
     """
     Computes the fraction of time spent in each behavior across all keys in ethogram_dict.
     """
     total_frames_all_flies = 0
-    overall_behavior_counts = np.zeros(max_behavior_code + 1, dtype=int)
+    overall_behavior_counts = np.zeros(int(max_behavior_code) + 1, dtype=int)
+    nan_count = 0
 
     for key, data in ethogram_dict.items():
         total_frames = np.sum(data["lengths"])
         total_frames_all_flies += total_frames
 
         for value, length in zip(data["values"], data["lengths"]):
-            overall_behavior_counts[value] += length
+            if np.isnan(value):
+                nan_count += length
+            else:
+                overall_behavior_counts[int(value)] += length
 
     overall_behavior_fractions = overall_behavior_counts / total_frames_all_flies
+    overall_behavior_fractions = np.append(
+        overall_behavior_fractions, nan_count / total_frames_all_flies
+    )
 
     return overall_behavior_fractions
 
@@ -336,3 +368,30 @@ df_overall = pd.DataFrame(
     overall_behavior_fractions, columns=["Overall behavior fractions"]
 )
 df_overall.to_csv("overall_behavior_fractions.csv", index=True)
+
+ethogram_dict.keys()
+
+output_folder = "20230522_awkde_noidle_bradies_25"
+min_frame_length = 25
+max_total_frames = 1000
+target_frames = 1000
+
+for key, data in ethogram_dict.items():
+    process_behavior(
+        key,
+        data,
+        output_folder,
+        min_frame_length,
+        max_total_frames,
+        target_frames,
+    )
+    break
+
+process_behavior(
+    key,
+    data,
+    output_folder,
+    min_frame_length,
+    max_total_frames,
+    target_frames,
+)
