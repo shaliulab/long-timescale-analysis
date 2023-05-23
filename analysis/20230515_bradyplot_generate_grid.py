@@ -1,6 +1,7 @@
 import os
-from moviepy.editor import VideoFileClip, clips_array
+
 import moviepy.video.fx.all as vfx
+from moviepy.editor import VideoFileClip, clips_array
 
 
 def make_grid(videofiles, outputfile):
@@ -65,7 +66,6 @@ def make_grids(folder):
 make_grids("bradies")
 
 import random
-
 
 from tqdm import tqdm
 
