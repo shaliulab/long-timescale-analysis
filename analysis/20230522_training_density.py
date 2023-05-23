@@ -1,14 +1,13 @@
-from awkde import GaussianKDE
-import numpy as np
-import numpy as np
-import utils.motionmapperpy.motionmapperpy as mmpy
-import matplotlib.pyplot as plt
+import copy
+
 import h5py
 import matplotlib as mpl
-import copy
-from skimage.segmentation import watershed
+import matplotlib.pyplot as plt
+import numpy as np
+import utils.motionmapperpy.motionmapperpy as mmpy
+from awkde import GaussianKDE
 from skimage.filters import roberts
-
+from skimage.segmentation import watershed
 
 training_embeddings_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/training_embedding.mat"
 wshedfile = h5py.File(training_embeddings_file, "r")

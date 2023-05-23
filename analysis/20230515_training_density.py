@@ -1,12 +1,10 @@
-from awkde import GaussianKDE
-import numpy as np
+from multiprocessing import Pool
+
+import h5py
+import matplotlib.pyplot as plt
 import numpy as np
 import utils.motionmapperpy.motionmapperpy as mmpy
-import matplotlib.pyplot as plt
-import h5py
-from multiprocessing import Pool
-import random
-
+from awkde import GaussianKDE
 
 training_embeddings_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230514-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/training_embedding.mat"
 wshedfile = h5py.File(training_embeddings_file, "r")

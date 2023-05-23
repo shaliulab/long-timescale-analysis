@@ -1,11 +1,8 @@
-from awkde import GaussianKDE
-import numpy as np
-import numpy as np
-import matplotlib.pyplot as plt
-import h5py
 from multiprocessing import Pool
-import numpy as np
+
+import h5py
 import matplotlib.pyplot as plt
+import numpy as np
 from scipy.ndimage.filters import gaussian_filter
 
 wshed_file = h5py.File(

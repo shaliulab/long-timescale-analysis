@@ -1,12 +1,12 @@
-import numpy as np
-import h5py
-import cv2
-import imageio
-import re
-from natsort import natsorted
-import imageio
-import os
 import multiprocessing
+import os
+import re
+
+import cv2
+import h5py
+import imageio
+import numpy as np
+from natsort import natsorted
 
 imageio.plugins.ffmpeg.download()
 
@@ -284,10 +284,8 @@ def save_matching_videos_parallel(
 # Call the function
 
 
-import pandas as pd
-
-
 import numpy as np
+import pandas as pd
 
 
 def compute_behavior_fractions(ethogram_dict, max_behavior_code):

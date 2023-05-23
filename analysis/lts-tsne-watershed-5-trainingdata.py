@@ -3,29 +3,10 @@ import sys
 sys.path.append("..")
 
 import glob
-import logging
-import os
-import pickle
-from datetime import datetime
-from pathlib import Path
 
 import h5py
-import hdf5storage
-import joypy
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 import natsort
-import numpy as np
-import palettable
-import pandas as pd
-import seaborn as sns
 import utils.motionmapperpy.motionmapperpy as mmpy
-import utils.trx_utils as trx_utils
-from matplotlib.colors import ListedColormap
-from scipy.io import loadmat, savemat
-from seaborn.distributions import distplot
-from tqdm import tqdm
-import importlib
 
 # importlib.reload(mmpy)
 
