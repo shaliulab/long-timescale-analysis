@@ -1,2 +1,0 @@
-centroid.json
-centroid_outputstride8_filters16.json
