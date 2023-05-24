@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     # %%%%%
     print(m.shape)
-    parameters.pcaModes = m.shape[1]  #%Number of PCA projections in saved files.
+    parameters.pcaModes = m.shape[1]  # %Number of PCA projections in saved files.
     parameters.numProjections = parameters.pcaModes
     # %%%%%
     del m

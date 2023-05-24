@@ -99,9 +99,10 @@ if __name__ == "__main__":
         logger.info(
             "Setting proboscis y-coordinate to 0 if less than 0.5 -- post egocentrizing..."
         )
-        prob_y = data[:, node_names.index("proboscis"), 1]
-        prob_y[prob_y < 0.5] = 0
-        data[:, node_names.index("proboscis"), 1] = prob_y
+        # TODO: rerun this
+        # prob_y = data[:, node_names.index("proboscis"), 1]
+        # prob_y[prob_y < 0.5] = 0
+        # data[:, node_names.index("proboscis"), 1] = prob_y
 
         data = np.delete(
             data,

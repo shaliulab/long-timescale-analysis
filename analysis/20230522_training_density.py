@@ -111,25 +111,26 @@ print(f"Number of points: {np.sum(mask)}")
 
 zValues = zValues[mask, :]
 
-# bounds, xx, density = mmpy.findPointDensity(
-#     zValues,
-#     numPoints=625,
-#     sigma=1,
-#     rangeVals=[-np.abs(zValues).max() - 15, np.abs(zValues).max() + 15],
-# )
-bounds, xx, density = findPointDensity_awkde(
+bounds, xx, density = mmpy.findPointDensity(
     zValues,
-    alpha=0.25,
-    glob_bw=0.048,
     numPoints=625,
+    sigma=1,
     rangeVals=[-np.abs(zValues).max() - 15, np.abs(zValues).max() + 15],
 )
+# bounds, xx, density = findPointDensity_awkde(
+#     zValues,
+#     alpha=0.25,
+#     glob_bw=0.048,
+#     numPoints=625,
+#     rangeVals=[-np.abs(zValues).max() - 15, np.abs(zValues).max() + 15],
+# )
 
 
 density_copy = copy.copy(density)
-density_copy[density_copy < 8e-6] = 0
+# density_copy[density_copy < 8e-4] = 0
 wshed = watershed(-density_copy, connectivity=10)
-wshed[density_copy < 8e-6] = 0
+wshed[density_copy < 2.1e-3] = 0
+wshed[density_copy > 2.1e-3] = 1
 
 numRegs = len(np.unique(wshed)) - 1
 for i, wreg in enumerate(np.unique(wshed)):

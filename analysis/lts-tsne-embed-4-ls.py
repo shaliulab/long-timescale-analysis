@@ -28,7 +28,7 @@ if __name__ == "__main__":
     with h5py.File(projectionFiles[args.number], "r") as f:
         m = f["projections"][:].T
     # %%%%%
-    parameters.pcaModes = m.shape[1]  #%Number of PCA projections in saved files.
+    parameters.pcaModes = m.shape[1]  # %Number of PCA projections in saved files.
     parameters.numProjections = parameters.pcaModes
     # %%%%%
     del m

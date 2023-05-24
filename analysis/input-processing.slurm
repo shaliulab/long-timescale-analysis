@@ -6,11 +6,11 @@
 #SBATCH --ntasks=1          # Number of tasks across all nodes
 #SBATCH --cpus-per-task=2      # Cores per task (>1 if multi-threaded tasks)
 #SBATCH --mem=64G           # total memory per node
-#SBATCH --array=1-141         # Array range
+#SBATCH --array=1-78        # Array range
 #SBATCH --time=06:00:00          # Run time limit (HH:MM:SS)        # Job array
 #SBATCH --mail-type=all          # Email on job start, end, and fault
 #SBATCH --mail-user=swwolf@princeton.edu
 
 conda activate sleap_dev
 
-python lts-tsne-input-1-singlefly.py --number $((${SLURM_ARRAY_TASK_ID} - 1))
+python lts-tsne-input-1.py --number $((${SLURM_ARRAY_TASK_ID} - 1))
