@@ -179,7 +179,6 @@ poetry.toml
 .history
 .ionide
 
-
 *.mat
 *.slp
 *.mp4
@@ -193,10 +192,11 @@ poetry.toml
 *.out
 *.pyc
 
+.vscode
 analysis/archive/
 analysis/data/
 analysis/matlab_mmpy/
-.vscode
 analysis/notebooks/figures/
 analysis/*/UMAP/
 **/*nfs*
+archive/
