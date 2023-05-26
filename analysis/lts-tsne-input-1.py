@@ -103,7 +103,6 @@ if __name__ == "__main__":
         locations[:, node_names.index("proboscis"), :, :] = head_prob_interp
 
         # TODO: Not needed with lomb-scargle
-        # logging.info("Filling missing data with median...")
         # locations = trx_utils.fill_nan_median(locations)
         locations = trx_utils.smooth_median(locations, window=5)
         locations = trx_utils.smooth_gaussian(locations)

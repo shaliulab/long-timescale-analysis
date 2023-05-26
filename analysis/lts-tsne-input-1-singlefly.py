@@ -86,7 +86,6 @@ if __name__ == "__main__":
         # locations = trx_utils.fill_nan_median(locations)
         locations = trx_utils.smooth_median(locations, window=5)
         locations = trx_utils.smooth_gaussian(locations)
-        # # TODO: Re
         logger.info(f"Processing individual in file {filename}!")
         data = locations
 
@@ -96,14 +95,6 @@ if __name__ == "__main__":
             fwd_ind=node_names.index("head"),
             fill=False,
         )
-        logger.info(
-            "Setting proboscis y-coordinate to 0 if less than 0.5 -- post egocentrizing..."
-        )
-        # TODO: rerun this
-        # prob_y = data[:, node_names.index("proboscis"), 1]
-        # prob_y[prob_y < 0.5] = 0
-        # data[:, node_names.index("proboscis"), 1] = prob_y
-
         data = np.delete(
             data,
             [

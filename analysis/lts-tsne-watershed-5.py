@@ -44,7 +44,7 @@ mmpy.findWatershedRegions(
     pThreshold=[0.33, 0.67],
     saveplot=True,
     endident="*-pcaModes.mat",
-    prev_wshed_file="/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/20230522_sigma1_minregions100_zVals_wShed_groups.mat",
+    prev_wshed_file="/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/figures/tmp/20230525_finalmap_adaptive.h5",
 )
 
 # %%

@@ -99,17 +99,6 @@ def compute_density_map(zValues, alpha, glob_bw, grid_pts, numPoints):
     return ZZ  # Return the density map for further processing
 
 
-training_data_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/training_data.mat"
-training_data = h5py.File(training_data_file, "r")
-normalized_wavelets = training_data["trainingSetData"][:].T
-
-training_amps_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/training_amps.mat"
-training_amps = h5py.File(training_amps_file, "r")
-amps = training_amps["trainingSetAmps"][:].T
-
-mask = np.sum(normalized_wavelets * amps, axis=1) > 4e2
-print(f"Number of points: {np.sum(mask)}")
-
 zValues = zValues[mask, :]
 
 bounds, xx, density = mmpy.findPointDensity(
@@ -118,32 +107,8 @@ bounds, xx, density = mmpy.findPointDensity(
     sigma=0.95,
     rangeVals=[-70, 70],
 )
-# bounds, xx, density = findPointDensity_awkde(
-#     zValues,
-#     alpha=0.25,
-#     glob_bw=0.048,
-#     numPoints=625,
-#     rangeVals=[-np.abs(zValues).max() - 15, np.abs(zValues).max() + 15],
-# )
-
 
 density_copy = copy.copy(density)
-# density_copy[density_copy < 8e-4] = 0
-wshed = watershed(-density_copy, connectivity=10)
-wshed[density_copy < 2.1e-3] = 0
-wshed[density_copy > 2.1e-3] = 1
-
-numRegs = len(np.unique(wshed)) - 1
-for i, wreg in enumerate(np.unique(wshed)):
-    wshed[wshed == wreg] = i
-wbounds = np.where(roberts(wshed).astype("bool"))
-wbounds = (wbounds[1], wbounds[0])
-fig, ax = plt.subplots()
-ax.imshow(density_copy, origin="lower", cmap=gencmap())
-ax.scatter(wbounds[0], wbounds[1], color="k", s=0.1)
-plt.imshow(density_copy, cmap=mmpy.gencmap(), origin="lower")
-plt.savefig("figures/tmp/tmp.png")
-plt.close()
 
 
 from scipy.ndimage import label
@@ -199,6 +164,7 @@ for region in regions:
         for contour in contours:
             plt.plot(contour[:, 1], contour[:, 0], linewidth=1, color=colors[region])
 
+
 # Adjust the positions of the text to minimize overlaps
 adjust_text(
     texts,
@@ -212,3 +178,25 @@ plt.axis("off")
 
 plt.savefig("figures/tmp/20230525_finalmap_adaptive.png", bbox_inches="tight")
 plt.close()
+
+bounds = getDensityBounds(density)
+xx = np.linspace(-70, 70, 610)
+wbounds = np.where(roberts(labels).astype("bool"))
+
+wbounds = (wbounds[1], wbounds[0])
+fig, ax = plt.subplots()
+ax.imshow(density_copy, origin="lower", cmap=gencmap())
+ax.scatter(wbounds[0], wbounds[1], color="k", s=0.1)
+plt.imshow(density_copy, cmap=mmpy.gencmap(), origin="lower")
+plt.savefig("figures/tmp/tmp.png")
+plt.close()
+
+f = h5py.File("figures/tmp/20230525_finalmap_adaptive.h5", "w")
+f.create_dataset("density", data=density)
+f.create_dataset("wbounds", data=wbounds)
+f.create_dataset("xx", data=xx)
+f.create_dataset("LL", data=labels.T)
+f.close()
+
+
+f = h5py.File("figures/tmp/20230525_finalmap_adaptive.h5", "r")
