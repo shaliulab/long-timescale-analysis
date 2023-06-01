@@ -100,7 +100,7 @@ for region, list_of_wlets in tqdm(output.items()):
     ax.set_yticks(np.arange(24))
     ax.set_yticklabels([wlet_nodes[j] for j in np.arange(24)])
     ax.colorbar()
-    figures_path = Path("figures/fingerprints/20230522-ls-example/")
+    figures_path = Path("figures/fingerprints/20230601-ls-example/")
     figures_path.mkdir(parents=True, exist_ok=True)
     fig.savefig(
         figures_path / f"region{region}-wavelet-example-by-part.png",

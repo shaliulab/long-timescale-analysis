@@ -10,10 +10,10 @@ from skimage.filters import roberts
 from skimage.segmentation import watershed
 
 
-training_embeddings_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230527-mmpy-lts-all-pchip5-headprobinterp-sety0lt05-medianwin5-gaussian-lombscargle-dynamicwinomega020-training/UMAP/training_embedding.mat"
-wshedfile = h5py.File(training_embeddings_file, "r")
+results_file = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230524-mmpy-lts-all-pchip5-headprobinterp-medianwin5-gaussian-lombscargle-dynamicwinomega020-training/UMAP/20230526_minregions100_zVals_wShed_groups_prevregions.mat"
+wshedfile = h5py.File(results_file, "r")
 
-zValues = wshedfile["trainingEmbedding"][:].T
+zValues = wshedfile["zValues"][:].T
 
 
 def getDensityBounds(density, thresh=1e-6):
@@ -99,104 +99,31 @@ def compute_density_map(zValues, alpha, glob_bw, grid_pts, numPoints):
     return ZZ  # Return the density map for further processing
 
 
-rangeVals = [-np.abs(zValues).max() - 15, np.abs(zValues).max() + 15]
+mask = ~np.isnan(zValues).any(axis=1)
+print(f"Number of points: {np.sum(mask)}")
+
+zValues = zValues[mask, :]
+
 bounds, xx, density = mmpy.findPointDensity(
     zValues,
     numPoints=610,
-    sigma=0.93,
-    rangeVals=rangeVals,
+    sigma=0.95,
+    rangeVals=[-70, 70],
 )
+
 
 density_copy = copy.copy(density)
+# density_copy[density_copy < 8e-4] = 0
+wshed = watershed(-density_copy, connectivity=10)
 
-
-from scipy.ndimage import label
-import scipy.io as sio
-from skimage.measure import find_contours
-import matplotlib.pyplot as plt
-import numpy as np
-import colorsys
-from adjustText import adjust_text
-import random
-
-# load mat file
-path = "/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/data/map_nointerp_newgrid.mat"
-data = sio.loadmat(path)
-BW3 = data["BW3"]
-
-labels, numRegs = label(BW3)
-
-
-# Function to generate maximally distinct colors
-def get_distinct_colors(n):
-    hue_partitions = np.linspace(0, 1, n + 1)[:-1]
-    colors = [colorsys.hsv_to_rgb(h, 1, 1) for h in hue_partitions]
-    return colors
-
-
-colors = get_distinct_colors(numRegs + 1)
-# permute colors
-colors = random.shuffle(colors, random_state=0)
-
-fig, ax = plt.subplots(figsize=(10, 10), dpi=300, frameon=False)
-plt.imshow(
-    density_copy, cmap=mmpy.gencmap(), origin="lower", alpha=0.5
-)  # Display the density
-
-# Now, we find contours for each region and add labels
-regions = np.unique(labels)
-
-texts = []  # Store all the text objects
-
-for region in regions:
-    if region != 0:  # We don't need to consider background as a region
-        region_coords = np.where(labels == region)
-        center_x = int(np.mean(region_coords[1]))
-        center_y = int(np.mean(region_coords[0]))
-
-        txt = plt.text(
-            center_x, center_y, str(region), color=colors[region], fontsize=12
-        )
-        texts.append(txt)
-
-        contours = find_contours(labels == region, 0.5)
-        for contour in contours:
-            plt.plot(contour[:, 1], contour[:, 0], linewidth=1, color=colors[region])
-
-
-# Adjust the positions of the text to minimize overlaps
-adjust_text(
-    texts,
-    force_points=0.2,
-    force_text=0.2,
-    expand_points=(1, 1),
-    expand_text=(1, 1),
-    arrowprops=dict(arrowstyle="-", color=colors, lw=0.5),
-)
-plt.axis("off")
-
-plt.savefig("figures/tmp/20230531_finalmap_adaptive.png", bbox_inches="tight")
-plt.close()
-
-bounds = getDensityBounds(density)
-xx = np.linspace(-75.79753494, 75.79753494, 610)
-wbounds = np.where(roberts(labels).astype("bool"))
-
+numRegs = len(np.unique(wshed)) - 1
+for i, wreg in enumerate(np.unique(wshed)):
+    wshed[wshed == wreg] = i
+wbounds = np.where(roberts(wshed).astype("bool"))
 wbounds = (wbounds[1], wbounds[0])
 fig, ax = plt.subplots()
 ax.imshow(density_copy, origin="lower", cmap=gencmap())
-ax.scatter(wbounds[0], wbounds[1], color="k", s=0.1)
+# ax.scatter(wbounds[0], wbounds[1], color="k", s=0.1)
 plt.imshow(density_copy, cmap=mmpy.gencmap(), origin="lower")
-plt.savefig("figures/tmp/tmp.png")
+plt.savefig("figures/tmp/20230526_141_density_sigma1.png")
 plt.close()
-
-
-f = h5py.File("data/20230531_finalmap_adaptive.h5", "w")
-f.create_dataset("density", data=density)
-f.create_dataset("wbounds", data=wbounds)
-f.create_dataset("xx", data=xx)
-f.create_dataset("LL", data=labels.T)
-f.close()
-
-
-# f = h5py.File("figures/tmp/20230531_finalmap_adaptive.h5", "r")

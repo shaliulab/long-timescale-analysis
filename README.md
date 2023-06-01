@@ -6,7 +6,7 @@ This reposity cotains the code corresponding with:
 
 ```
 @article{lts-behavior,
-  author = {Grace C. McKenzie-Smith* and Scott Wolf* and Joshua Shaevitz},
+  author = {Grace C. McKenzie-Smith* and Scott Wolf* and Julien Ayroles and Joshua Shaevitz},
   title = {Capturing continuous, long timescale behavioral changes in \textit{Drosophila melanogaster}}
 ```
 
@@ -16,13 +16,13 @@ This reposity cotains the code corresponding with:
 
 ## Data
 
-The data associated with this study can be found at [URL] and is described in detail within the paper. The data set encompasses over 2 billion pose instances, each paired with edge calls and metadata.
+The data associated with this study can be found at [URL](URL) and is described in detail within the paper. The data set encompasses over 2 billion pose instances, each paired with edge calls and metadata.
 
 ## Unsupervised behavioral analysis
 
 Brief examples of analysis are available here illustrating how to load and analyze tracks. This pipeline heavily depends on work from Gordon Berman and Kanishk Jain both from the MATLAB implementation of [MotionMapper](https://github.com/gordonberman/MotionMapper) and the Python implementation [MotionMapperPy](https://github.com/bermanlabemory/motionmapperpy).
 
-The main refinements of this pipeline is dealing with memory constraints of the original MotionMapperPy implementation, separating steps to allow for drastic speed increases with parallelization, and the utilization of Lomb-Scargle periodograms to identify periodic behaviors in addition to continuous wavelet transoforms (CWT).
+The main refinements of this pipeline is dealing with memory constraints of the original MotionMapperPy implementation, separating steps to allow for drastic speed increases with parallelization, and the utilization of Lomb-Scargle periodograms to identify periodic behaviors in addition to continuous wavelet transforms (CWT).
 
 
 ### Pipeline 

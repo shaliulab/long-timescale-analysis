@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=input  # Name of the job
+#SBATCH --job-name=embed  # Name of the job
 #SBATCH --output=logs/embed-%A-%a.out  # STDOUT file
 #SBATCH --error=logs/embed-%A-%a.err   # STDERR file
 #SBATCH --nodes=1               # Node count

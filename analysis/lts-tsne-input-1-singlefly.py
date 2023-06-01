@@ -16,7 +16,6 @@ from pathlib import Path
 import h5py
 import natsort
 import numpy as np
-import pandas as pd
 import utils.motionmapperpy.motionmapperpy as mmpy
 import utils.trx_utils as trx_utils
 
@@ -26,9 +25,8 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 
-
 logger = logging.getLogger("analysis_logger")
-logger.info("Starting... version v0.0.1")
+logger.info("Starting... version v0.0.2")
 
 frame_rate = 99.96  # Hz
 px_mm = 28.25  # mm/px
@@ -38,6 +36,7 @@ base_paths = ["/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis"]
 example_file = "/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_tracks/20220217-lts-cam1/cam1_20220217_0through190_cam1_20220217_0through190_100-tracked.analysis.h5"
 with h5py.File(example_file, "r") as f:
     node_names = [n.decode() for n in f["node_names"][:]]
+
 
 parameters = mmpy.setRunParameters()
 mmpy.createProjectDirectory(parameters.projectPath)
@@ -61,12 +60,17 @@ if __name__ == "__main__":
             if locations.shape[0] < 100:
                 locations = locations.T
         logger.info("Loaded tracks...")
+        logger.info(
+            f"Fraction of prob nan before interpolation {np.mean(np.isnan(locations[:, node_names.index('proboscis'), 0]))}"
+        )
+        logger.info(
+            f"Fraction of head nan before interpolation {np.mean(np.isnan(locations[:, node_names.index('head'), 0]))}"
+        )
 
         locations[:, 0:13, :] = trx_utils.fill_missing(
             locations[:, 0:13, :], kind="pchip", limit=5
         )
 
-        # logger.info("Filled missing data with median...")
         locations[:, node_names.index("head"), :] = trx_utils.fill_missing(
             locations[:, node_names.index("head"), :], kind="pchip"
         )
@@ -95,6 +99,16 @@ if __name__ == "__main__":
             fwd_ind=node_names.index("head"),
             fill=False,
         )
+        # TODO: Adjust?
+        # logger.info(
+        #     "Setting proboscis y-coordinate to 0 if less than 0.5 -- post egocentrizing..."
+        # )
+        # prob_y = data[:, node_names.index("proboscis"), 1]
+        # print(
+        #     f"Fraction of proboscis y-coordinates less than 0.5: {np.mean(np.abs(prob_y) < 0.5)}"
+        # )
+        # prob_y[np.abs(prob_y) < 0.5] = 0
+        # data[:, node_names.index("proboscis"), 1] = prob_y
         data = np.delete(
             data,
             [
@@ -110,7 +124,7 @@ if __name__ == "__main__":
             continue
 
         reshaped_data = data.reshape((data.shape[0], 2 * data.shape[1]))
-        # reshaped_data = reshaped_data[:, 0:23]
+
         logger.info("Shape after masking: %s", reshaped_data.shape)
         logger.info("Writing...")
         with h5py.File(
@@ -120,14 +134,6 @@ if __name__ == "__main__":
             dset = f.create_dataset(
                 "projections", data=reshaped_data.T, compression="lzf"
             )
-
-        # edge_file = (
-        #     "../data/edge/"
-        #     + "-".join(Path(filename).stem.split("-")[:3])
-        #     + "_edge.mat"
-        # )
-        # with h5py.File(edge_file, "r") as hfile:
-        #     edge_mask = np.append([False], hfile["edger"][:].T[:, i].astype(bool))
 
         logger.info("Writing fly number %s EGO to file...")
         with h5py.File(
