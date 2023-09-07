@@ -29,7 +29,7 @@ logging.basicConfig(
 
 
 logger = logging.getLogger("analysis_logger")
-logger.info("Starting... version v0.0.1")
+logger.info("Starting... version v0.0.2")
 
 frame_rate = 99.96  # Hz
 px_mm = 28.25  # mm/px
@@ -103,7 +103,6 @@ if __name__ == "__main__":
         locations[:, node_names.index("proboscis"), :, :] = head_prob_interp
 
         # TODO: Not needed with lomb-scargle
-        # logging.info("Filling missing data with median...")
         # locations = trx_utils.fill_nan_median(locations)
         locations = trx_utils.smooth_median(locations, window=5)
         locations = trx_utils.smooth_gaussian(locations)
@@ -119,6 +118,12 @@ if __name__ == "__main__":
             # TODO: Read
             logger.info(f"Processing individual {i} in file {filename}!")
             data = locations[:, :, :, i]
+            logger.info(
+                f"Fraction of prob nan before interpolation indiv {i}: {np.mean(np.isnan(data[:, node_names.index('proboscis'), 0]))}"
+            )
+            logger.info(
+                f"Fraction of head nan before interpolation for indiv {i}: {np.mean(np.isnan(data[:, node_names.index('head'), 0]))}"
+            )
             matching_row = matching_rows[matching_rows["within_arena_id"] == i]
             logger.info(f"Matching metadata: {matching_row}")
             if len(matching_rows) == 0:
@@ -152,6 +157,17 @@ if __name__ == "__main__":
                 ctr_ind=node_names.index("thorax"),
                 fwd_ind=node_names.index("head"),
             )
+
+            # logger.info(
+            #     "Setting proboscis y-coordinate to 0 if less than abs(0.5) -- post egocentrizing..."
+            # )
+            # prob_y = data[:, node_names.index("proboscis"), 1]
+            # print(
+            #     f"Fraction of proboscis y-coordinates less than 0.5: {np.mean(np.abs(prob_y) < 0.5)}"
+            # )
+            # prob_y[np.abs(prob_y) < 0.5] = 0
+            # data[:, node_names.index("proboscis"), 1] = prob_y
+
             data = np.delete(
                 data,
                 [

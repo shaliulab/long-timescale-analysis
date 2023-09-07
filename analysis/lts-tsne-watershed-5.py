@@ -3,28 +3,11 @@ import sys
 sys.path.append("..")
 
 import glob
-import logging
-import os
-import pickle
-from datetime import datetime
-from pathlib import Path
 
 import h5py
-import hdf5storage
-import joypy
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 import natsort
-import numpy as np
-import palettable
-import pandas as pd
-import seaborn as sns
 import utils.motionmapperpy.motionmapperpy as mmpy
-import utils.trx_utils as trx_utils
-from matplotlib.colors import ListedColormap
-from scipy.io import loadmat, savemat
-from seaborn.distributions import distplot
-from tqdm import tqdm
+
 
 parameters = mmpy.setRunParameters()
 # parameters.projectPath = "20230421-mmpy-lts-all-headprobinterp-missingness-pchip5-medianwin5-gaussian"
@@ -44,7 +27,7 @@ mmpy.findWatershedRegions(
     pThreshold=[0.33, 0.67],
     saveplot=True,
     endident="*-pcaModes.mat",
-    prev_wshed_file="/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20230522-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks/UMAP/20230522_sigma1_minregions100_zVals_wShed_groups.mat",
+    prev_wshed_file="/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/data/20230531_finalmap_adaptive.h5",
 )
 
 # %%

@@ -10,20 +10,14 @@ repos:
     hooks:
       - id: black
         language_version: python3
-# -   repo: https://github.com/pycqa/flake8
-#     rev: '5.0.0'
-#     hooks:
-#       - id: flake8
-#         args: ["--config=.flake8"]
+-   repo: https://github.com/pycqa/flake8
+    rev: '5.0.0'
+    hooks:
+      - id: flake8
+        args: ["--config=.flake8"]
 -   repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.990
     hooks:
       - id: mypy
-        additional_dependencies:  # have to add every typestub module here
-          - sqlalchemy-stubs
-          - boto3-stubs[essential]
-          - click
-          - pydantic
-          - types-requests
         language_version: python3
         args: ["--config-file=mypy.ini"]

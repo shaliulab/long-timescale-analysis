@@ -4392,3 +4392,751 @@ Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_1.h5
 /Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day3_24hourvars.h5, 3
 /Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day1_24hourvars.h5, 3
 /Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_2.h5
+
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_3.h5/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_2.h5
+
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_3.h5
+
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day5_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day5_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day5_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day5_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day6_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day7_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day5_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day6_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day6_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day7_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day5_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day6_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day4_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day5_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day5_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day2_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day7_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day5_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day7_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day5_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day6_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day2_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day6_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day8_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day5_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day5_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day5_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day5_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day5_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day5_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day6_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day5_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day7_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day4_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day7_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day6_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day7_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day5_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day2_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day5_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day5_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day4_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day6_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day6_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day3_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day7_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day6_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day5_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day4_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day5_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day4_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day2_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day5_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day6_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day5_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day5_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day1_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day2_24hourvars.h5, 0
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day2_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam4_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day4_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day4_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day4_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam4_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day5_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day5_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day5_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day6_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day3_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam4_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220326-lts-cam3_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam1_day5_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day2_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day1_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day2_24hourvars.h5, 1
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day4_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day4_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam3_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day5_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day6_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day3_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day2_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam1_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day1_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day2_24hourvars.h5, 2
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day4_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam3_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam3_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220418-lts-cam2_day3_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220312-lts-cam4_day1_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/20220217-lts-cam2_day2_24hourvars.h5, 3
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_21samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_13samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_23samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_3.h5
+
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_20samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_3samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_18samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_12samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_10samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_17samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_9samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_15samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_7samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_2samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_5samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_24samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_25samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_26samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_22samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_19samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_14samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_6samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_16samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_4samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_1samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_11samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_8samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_27samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_28samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_29samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_30samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_31samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_32samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_33samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_44samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_34samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_39samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_35samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_41samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_45samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_38samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_46samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_40samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_42samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_43samp_1.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_36samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_37samp_3.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_2.h5
+/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis/flid_47samp_3.h5
