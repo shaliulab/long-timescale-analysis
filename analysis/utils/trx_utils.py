@@ -7,6 +7,7 @@ import pandas as pd
 import scipy.ndimage
 from scipy.signal import savgol_filter
 from tqdm import tqdm
+import traceback
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s: %(message)s",
@@ -93,6 +94,7 @@ def fill_nan_median(x, kind="median", axis=0, **kwargs):
             x = fill_nan_median(x, kind=kind, axis=axis, **kwargs)
         except Exception as e:
             logger.error(f"Error interpolating: {e}")
+            logger.error(traceback.print_exc())
             # raise e
 
         # Restore to original shape
@@ -130,6 +132,7 @@ def fill_missing(x, kind="nearest", axis=0, **kwargs):
             x = fill_missing(x, kind=kind, axis=0, **kwargs)
         except Exception as e:
             logger.error(f"Error interpolating: {e}")
+            logger.error(traceback.print_exc())
             # raise e
 
         # Restore to original shape
@@ -271,7 +274,6 @@ def normalize_to_egocentric(
 
         If return_angles is True, also returns a vector of angles.
     """
-
     if rel_to is None:
         rel_to = x
 
@@ -609,8 +611,11 @@ def describe_hdf5(filename, attrs=True):
 
 import palettable
 import skvideo
+import os
+python_bin=os.environ.get("CONDA_PREFIX", "/usr/") + "/bin"
+skvideo.setFFmpegPath(python_bin)
+print(f"Using {python_bin}/ffmpeg")
 
-skvideo.setFFmpegPath("/Genomics/argo/users/swwolf/.conda/envs/sleap_dev/bin")
 import skvideo.io
 
 
@@ -1123,3 +1128,46 @@ def rolling_window(a, window):
     shape = a.shape[:-1] + (a.shape[-1] - window + 1, window)
     strides = a.strides + (a.strides[-1],)
     return np.lib.stride_tricks.as_strided(a, shape=shape, strides=strides)
+
+
+
+def interpolate(locations, node_names, limit=5):
+
+    head=locations[:, node_names.index("head"), :].copy()
+    proboscis=locations[:, node_names.index("proboscis"), :].copy()
+    thorax=locations[:, node_names.index("thorax"), :].copy()
+    
+
+    locations = fill_missing(
+        locations, kind="pchip", limit=limit
+    )
+
+    locations[:, node_names.index("head"), :]=head
+    locations[:, node_names.index("proboscis"), :]=proboscis
+    locations[:, node_names.index("thorax"), :]=thorax
+    
+
+    locations[:, node_names.index("head"), :] = fill_missing(
+        locations[:, node_names.index("head"), :], kind="pchip"
+    )
+    locations[:, node_names.index("thorax"), :] = fill_missing(
+        locations[:, node_names.index("thorax"), :], kind="pchip"
+    )
+
+    head_prob_interp = np.where(
+        np.isnan(locations[:, node_names.index("proboscis"), :]),
+        locations[:, node_names.index("head"), :],
+        locations[:, node_names.index("proboscis"), :],
+    )
+    locations[:, node_names.index("proboscis"), :] = head_prob_interp
+
+    return locations
+
+def smoothen(locations):
+
+    # TODO: Not needed with lomb-scargle
+    # logging.info("Filling missing data with median...")
+    # locations = trx_utils.fill_nan_median(locations)
+    locations = smooth_median(locations, window=5)
+    locations = smooth_gaussian(locations)
+    return locations

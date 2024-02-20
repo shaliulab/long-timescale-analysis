@@ -17,12 +17,14 @@ import utils.motionmapperpy.motionmapperpy as mmpy
 parser = argparse.ArgumentParser(description="Bulk embeddings")
 parser.add_argument("--number", type=int)
 
-if __name__ == "__main__":
+
+def main():
     print(f"Starting {datetime.now().strftime('%m-%d-%Y_%H-%M')}")
     args = parser.parse_args()
     # i = args.number
 
     parameters = mmpy.setRunParameters()
+
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     projectionFiles = natsort.natsorted(projectionFiles)
     with h5py.File(projectionFiles[args.number], "r") as f:
@@ -89,3 +91,7 @@ if __name__ == "__main__":
         pickle.dump(outputStatistics, hfile)
     print("Embeddings saved.\n")
     del zValues, projections, outputStatistics
+
+
+if __name__ == "__main__":
+    main()

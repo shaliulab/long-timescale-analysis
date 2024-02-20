@@ -53,27 +53,9 @@ if __name__ == "__main__":
             locations = f["tracks"][:].T
         logger.info("Loaded tracks...")
 
-        locations[:, 0:13, :] = trx_utils.fill_missing(
-            locations[:, 0:13, :], kind="pchip", limit=10
-        )
-        logger.info("Filled missing data with median...")
-        locations[:, node_names.index("head"), :, :] = trx_utils.fill_missing(
-            locations[:, node_names.index("head"), :, :], kind="pchip"
-        )
-        locations[:, node_names.index("thorax"), :, :] = trx_utils.fill_missing(
-            locations[:, node_names.index("thorax"), :, :], kind="pchip"
-        )
-
-        head_prob_interp = np.where(
-            np.isnan(locations[:, node_names.index("proboscis"), :, :]),
-            locations[:, node_names.index("head"), :, :],
-            locations[:, node_names.index("proboscis"), :, :],
-        )
-        locations[:, node_names.index("proboscis"), :, :] = head_prob_interp
-
+        locations=trx_utils.interpolate(locations, node_names)
         locations = trx_utils.fill_nan_median(locations)
-        locations = trx_utils.smooth_median(locations, window=5)
-        locations = trx_utils.smooth_gaussian(locations)
+        locations = trx_utils.smoothen(locations, window=5)
         folder = Path(filename).parent.name
         final_folder_path = Path(parameters.projectPath) / "for_grace" / folder
         final_folder_path.mkdir(parents=True, exist_ok=True)

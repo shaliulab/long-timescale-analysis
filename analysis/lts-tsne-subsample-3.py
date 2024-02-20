@@ -13,11 +13,14 @@ from tqdm import tqdm
 
 if __name__ == "__main__":
     parameters = mmpy.setRunParameters()
-    # parameters.projectPath = "20230514-mmpy-lts-all-pchip5-headprobinterpy0xhead-medianwin5-gaussian-lombscargle-dynamicwinomega020-singleflysampledtracks2"
+    parameters.projectPath="FlyHostel_long_timescale_analysis"
+
+
     projectionFiles = glob.glob(parameters.projectPath + "/Projections/*pcaModes.mat")
     print("Found {} projection files".format(len(projectionFiles)))
     print(f"Project path: {parameters.projectPath}")
     projectionFiles = natsort.natsorted(projectionFiles)
+
     with h5py.File(projectionFiles[0], "r") as f:
         m = f["projections"][:].T
 

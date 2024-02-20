@@ -3,21 +3,12 @@
 # Remove eyes
 # Instead of linearly interpolating, replace all nans with coordinate of head point
 
-# %%
-import sys
-
-sys.path.append("..")
 
 import argparse
-import glob
 import logging
-from pathlib import Path
-
-import h5py
-import natsort
-import numpy as np
-import utils.motionmapperpy.motionmapperpy as mmpy
-import utils.trx_utils as trx_utils
+from analysis.utils.preprocess.compat import process_path, list_files, load_node_names
+import joblib
+import analysis.utils.motionmapperpy.motionmapperpy as mmpy
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s: %(message)s",
@@ -26,128 +17,63 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger("analysis_logger")
-logger.info("Starting... version v0.0.2")
+logger.info("Starting... version v0.0.3")
 
-frame_rate = 99.96  # Hz
-px_mm = 28.25  # mm/px
-base_paths = ["/Genomics/ayroleslab2/scott/git/lts-manuscript/analysis"]
-# %%sb
-
-example_file = "/Genomics/ayroleslab2/scott/long-timescale-behavior/data/organized_tracks/20220217-lts-cam1/cam1_20220217_0through190_cam1_20220217_0through190_100-tracked.analysis.h5"
-with h5py.File(example_file, "r") as f:
-    node_names = [n.decode() for n in f["node_names"][:]]
-
-
-parameters = mmpy.setRunParameters()
-mmpy.createProjectDirectory(parameters.projectPath)
 
 parser = argparse.ArgumentParser(description="Bulk embeddings")
-parser.add_argument("--number", type=int, help="what file tho?")
+group=parser.add_mutually_exclusive_group(required=True)
+group.add_argument("--number", type=int, default=None, help="what file tho?")
+group.add_argument("--animal", type=str, default=None, help="what file tho?")
+group.add_argument("--files", type=str, nargs="+", default=None, help="what file tho?")
+parser.add_argument("--base-paths", type=str, help="Location of h5 files", nargs="+")
+parser.add_argument("--n-jobs", type=int, help="Files processed in parallel")
+parser.add_argument("--cache", type=str, default=None)
 
-if __name__ == "__main__":
+
+def main():
     logger.info("Starting...")
     args = parser.parse_args()
-    number = args.number
-    for base_path in base_paths:
-        filenames = glob.glob(base_path + "/*.h5")
-        filenames = natsort.natsorted(filenames)
-        filename = filenames[number]
+    base_paths = args.base_paths
+    if base_paths is None:
+        base_paths=[None]
+    n_jobs = args.n_jobs
 
-        logger.info(filename)
-        with h5py.File(filename, "r") as f:
-            dset_names = list(f.keys())
-            locations = f["tracks"][:]
-            if locations.shape[0] < 100:
-                locations = locations.T
-        logger.info("Loaded tracks...")
-        logger.info(
-            f"Fraction of prob nan before interpolation {np.mean(np.isnan(locations[:, node_names.index('proboscis'), 0]))}"
-        )
-        logger.info(
-            f"Fraction of head nan before interpolation {np.mean(np.isnan(locations[:, node_names.index('head'), 0]))}"
-        )
+    parameters = mmpy.setRunParameters()
+    parameters.projectPath="FlyHostel_long_timescale_analysis"
 
-        locations[:, 0:13, :] = trx_utils.fill_missing(
-            locations[:, 0:13, :], kind="pchip", limit=5
-        )
 
-        locations[:, node_names.index("head"), :] = trx_utils.fill_missing(
-            locations[:, node_names.index("head"), :], kind="pchip"
-        )
-        locations[:, node_names.index("thorax"), :] = trx_utils.fill_missing(
-            locations[:, node_names.index("thorax"), :], kind="pchip"
-        )
+    mmpy.createProjectDirectory(parameters.projectPath)
 
-        head_prob_interp = np.where(
-            np.isnan(locations[:, node_names.index("proboscis"), :]),
-            locations[:, node_names.index("head"), :],
-            locations[:, node_names.index("proboscis"), :],
-        )
-        locations[:, node_names.index("proboscis"), :] = head_prob_interp
+    if args.files is None:
+        filenames = list_files(base_paths[0])
+        if args.number is None:
+            selector=args.animal
+        elif args.files is None:
+            selector=args.number
 
-        # TODO: Not needed with lomb-scargle
-        # logging.info("Filling missing data with median...")
-        # locations = trx_utils.fill_nan_median(locations)
-        locations = trx_utils.smooth_median(locations, window=5)
-        locations = trx_utils.smooth_gaussian(locations)
-        logger.info(f"Processing individual in file {filename}!")
-        data = locations
+    else:
+        filenames=args.files
+        selector=0 # not more than 1
 
-        data = trx_utils.normalize_to_egocentric(
-            x=data,
-            ctr_ind=node_names.index("thorax"),
-            fwd_ind=node_names.index("head"),
-            fill=False,
-        )
-        # TODO: Adjust?
-        # logger.info(
-        #     "Setting proboscis y-coordinate to 0 if less than 0.5 -- post egocentrizing..."
-        # )
-        # prob_y = data[:, node_names.index("proboscis"), 1]
-        # print(
-        #     f"Fraction of proboscis y-coordinates less than 0.5: {np.mean(np.abs(prob_y) < 0.5)}"
-        # )
-        # prob_y[np.abs(prob_y) < 0.5] = 0
-        # data[:, node_names.index("proboscis"), 1] = prob_y
-        data = np.delete(
-            data,
-            [
-                node_names.index("thorax"),
-                node_names.index("head"),
-            ],
-            axis=1,
-        )
-        logger.info("Shape before masking: %s", data.shape)
-        mask = np.all(np.isnan(data[:, :, 0]) | np.equal(data[:, :, 0], 0), axis=1)
+    node_names=load_node_names(filenames[0])
 
-        if data.shape[0] == 0:
-            continue
-
-        reshaped_data = data.reshape((data.shape[0], 2 * data.shape[1]))
-
-        logger.info("Shape after masking: %s", reshaped_data.shape)
-        logger.info("Writing...")
-        with h5py.File(
-            f"{parameters.projectPath}/Projections/{Path(Path(filename).stem).stem}-pcaModes.mat",
-            "w",
-        ) as f:
-            dset = f.create_dataset(
-                "projections", data=reshaped_data.T, compression="lzf"
+    if n_jobs == 1:
+        for base_path in base_paths:
+            process_path(base_path, selector, node_names, parameters, filenames=filenames, cache=args.cache)
+    else:
+        joblib.Parallel(n_jobs=n_jobs)(
+            joblib.delayed(
+                process_path
+            )(
+                base_path, selector, node_names, parameters, filenames=filenames, cache=args.cache
             )
+            for base_path in base_paths
+        )
 
-        logger.info("Writing fly number %s EGO to file...")
-        with h5py.File(
-            f"{parameters.projectPath}/Ego/{Path(Path(filename).stem).stem}-pcaModes.h5",
-            "w",
-        ) as f:
-            dset = f.create_dataset("tracks", data=data.T, compression="lzf")
-            dset = f.create_dataset(
-                "missing_data_indices", data=mask, compression="lzf"
-            )
-            # dset = f.create_dataset("edge_calls", data=edge_mask, compression="lzf")
 
-        with open("files_processed_complete.txt", "a") as f:
-            f.write(f"{filename}\n")
-        continue
 
-# %%
+
+
+
+if __name__ == "__main__":
+    main()
